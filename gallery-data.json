@@ -18,6 +18,31 @@
         "src": "images/redbug.jpg",
         "title": "Nymph (immature stage) of an Assassin Bug from the family Reduviidae",
         "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/termites.jpg",
+        "title": "Termites",
+        "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/chicken.jpg",
+        "title": "Chicken",
+        "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/piranha.jpg",
+        "title": "Piranha",
+        "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/caterpillar.jpg",
+        "title": "Fuzzy Caterpillar",
+        "desc": "I noticed this caterpillar on my kayak while kayaking on Lake Collins. I then carefully paddled back to camp so that I could take pictures of it. I had to rescue it a few times when it fell into the water."
+    },
+    {
+        "src": "images/kitty.jpg",
+        "title": "Katherine's Kitty",
+        "desc": ""
     }
 
 ]
