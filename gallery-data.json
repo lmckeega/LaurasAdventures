@@ -1,17 +1,100 @@
 [
     {
-        "src": "images/termites.jpg",
-        "title": "Termites",
-        "desc": "Amazon Jungle, Peru"
+        "src": "images/spider.jpg",
+        "title": "Writing Spider",
+        "desc": "Moyock, NC"
     },
     {
         "src": "images/spider.jpg",
         "title": "Writing Spider",
-        "desc": "Backyard Garden, Texas"
+        "desc": "Moyock, NC"
+    },
+    {
+        "src": "images/dragonfly2.jpg",
+        "title": "Spangled Skimmer",
+        "desc": "Moyock, NC"
+    },
+    {
+        "src": "images/redbug.jpg",
+        "title": "Nymph (immature stage) of an Assassin Bug from the family Reduviidae",
+        "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
     },
     {
         "src": "images/dragonfly.jpg",
         "title": "Dragonfly",
         "desc": "Cloud Forest, Ecuador"
     }
+
+
+
 ]
