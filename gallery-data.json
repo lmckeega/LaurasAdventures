@@ -43,6 +43,31 @@
         "src": "images/kitty.jpg",
         "title": "Katherine's Kitty",
         "desc": ""
+    },
+    {
+        "src": "images/beetle.jpg",
+        "title": "Sabertooth Longhorn Beetle",
+        "desc": "This bug was about 5 or 6 inches long. Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/frog.jpg",
+        "title": "Rosenberg's Tree Frog",
+        "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Migrant Hawker Dragonfly",
+        "desc": "This dragonfly was on a totem pole in Ketchikan, Alaska. I started taking pictures of it and suddenly people were more interested in the dragonfly than the totem pole."
+    },
+    {
+        "src": "images/crab.jpg",
+        "title": "Dungeness Crab",
+        "desc": "This crab is waiting for dinner time. Alaska"
+    },
+    {
+        "src": "images/armyant.jpg",
+        "title": "Burchell's Army Ant",
+        "desc": "Amazon Jungle, Peru"
     }
 
 ]
