@@ -1,0 +1,17 @@
+[
+    {
+        "src": "images/termites.jpg",
+        "title": "Termites",
+        "desc": "Amazon Jungle, Peru"
+    },
+    {
+        "src": "images/spider.jpg",
+        "title": "Writing Spider",
+        "desc": "Backyard Garden, Texas"
+    },
+    {
+        "src": "images/dragonfly.jpg",
+        "title": "Dragonfly",
+        "desc": "Cloud Forest, Ecuador"
+    }
+]
