@@ -1,87 +1,87 @@
 [
-    {
-        "src": "images/booknook/33.jpg",
-        "title": "Knockturn Alley Book Nook",
-        "desc": "The miniature alley opens between two rows of weathered buildings, with glowing shop windows, stairways, and surprises tucked into the scene."
-    },
-    {
-        "src": "images/booknook/8.jpg",
-        "title": "A Peek Inside the Book Nook",
-        "desc": "Seen through the framed opening, the narrow alley gives the illusion of a street stretching farther into the distance."
-    },
-    {
-        "src": "images/booknook/14.jpg",
-        "title": "Down the Cobblestone Alley",
-        "desc": "Warm streetlamps and glowing storefront windows guide the eye along the narrow, atmospheric passage."
-    },
-    {
-        "src": "images/booknook/28.jpg",
-        "title": "The Alley After Dark",
-        "desc": "Blue, green, and purple light from the windows gives this view between the buildings a mysterious nighttime feeling."
-    },
-    {
-        "src": "images/booknook/34.jpg",
-        "title": "The Diagon Alley Entrance",
-        "desc": "An arched passage marked by a tiny Diagon Alley sign sits among brick walls and shop windows. Look closely for the Mail Owl flying toward you!"
-    },
-    {
-        "src": "images/booknook/29.jpg",
-        "title": "Borgin and Burkes",
-        "desc": "The curved shop windows, hanging sign, and weathered doors make this storefront worth exploring up close."
-    },
-    {
-        "src": "images/booknook/3.jpg",
-        "title": "Cauldrons Outside the Shop",
-        "desc": "Stacked cauldrons stand beside the windows of Borgin and Burkes, with little details visible inside the shop."
-    },
-    {
-        "src": "images/booknook/52.jpg",
-        "title": "Skulls in the Window",
-        "desc": "Look closely at the lighted windowpanes to spot the skulls peering out from behind the glass."
-    },
-    {
-        "src": "images/booknook/22.jpg",
-        "title": "Bones, Barrels, and Broomsticks",
-        "desc": "A barrel of bones, a bundle of broomsticks, and Hermione near the doorway fill this corner of the alley."
-    },
-    {
-        "src": "images/booknook/47.jpg",
-        "title": "The Skeleton by the Stairs",
-        "desc": "A skeleton sits on a crate beneath the wooden stairs and a red-glowing window."
-    },
-    {
-        "src": "images/booknook/17.jpg",
-        "title": "The Hidden Staircase",
-        "desc": "Tiny doors, winding stairs, and Wesley on the landing add another layer of detail above the alley."
-    },
-    {
-        "src": "images/booknook/49.jpg",
-        "title": "The Daily Prophet Sign",
-        "desc": "A miniature hanging newspaper sign adds a recognizable detail against the weathered wall and glowing blue window."
-    },
-    {
-        "src": "images/booknook/31.jpg",
-        "title": "A Glowing Streetlamp",
-        "desc": "Even this tiny streetlamp has character, casting warm light against the rough wooden siding."
-    },
-    {
-        "src": "images/booknook/43.jpg",
-        "title": "Colorful Windows and a Winding Pipe",
-        "desc": "A twisting pipe climbs the brick wall beside the tall, green-lit window."
-    },
-    {
-        "src": "images/booknook/5.jpg",
-        "title": "A Glimpse Down the Passage",
-        "desc": "The close viewpoint and shallow focus create a mysterious view through the narrow alley."
-    },
-    {
-        "src": "images/booknook/10.jpg",
-        "title": "Building the Wooden Facade",
-        "desc": "One of the building fronts photographed separately, showing the weathered siding, miniature doors, and window frames."
-    },
-    {
-        "src": "images/booknook/12.jpg",
-        "title": "Building the Brick Wall",
-        "desc": "A separate wall panel reveals the textured brickwork and winding pipe that help give the finished scene its character."
-    }
+  {
+    "src": "images/booknook/33.jpg",
+    "title": "Knockturn Alley Book Nook",
+    "desc": "There is a lot to discover in this tiny alley, from the glowing shop windows to the stairways tucked between the buildings."
+  },
+  {
+    "src": "images/booknook/8.jpg",
+    "title": "A Peek Inside the Book Nook",
+    "desc": "From this angle, the alley seems to stretch much farther into the distance than you would expect from a book nook."
+  },
+  {
+    "src": "images/booknook/14.jpg",
+    "title": "Down the Cobblestone Alley",
+    "desc": "Follow the glow of the streetlamps down the cobblestone alley. There are little details to discover all along the way."
+  },
+  {
+    "src": "images/booknook/28.jpg",
+    "title": "The Alley After Dark",
+    "desc": "The alley takes on a different look after dark, with blue, green, and purple light glowing through the windows."
+  },
+  {
+    "src": "images/booknook/34.jpg",
+    "title": "The Diagon Alley Entrance",
+    "desc": "An arched passage marked by a tiny Diagon Alley sign sits among brick walls and shop windows. Look closely for the Mail Owl flying toward you!"
+  },
+  {
+    "src": "images/booknook/29.jpg",
+    "title": "Borgin and Burkes",
+    "desc": "Take a closer look at Borgin and Burkes. The curved shop windows, hanging sign, and weathered doors give it plenty of character."
+  },
+  {
+    "src": "images/booknook/3.jpg",
+    "title": "Cauldrons Outside the Shop",
+    "desc": "The stacked cauldrons are easy to spot, but take a look through the windows of Borgin and Burkes, too."
+  },
+  {
+    "src": "images/booknook/52.jpg",
+    "title": "Skulls in the Window",
+    "desc": "Look closely at the lighted windowpanes to spot the skulls peering out from behind the glass."
+  },
+  {
+    "src": "images/booknook/22.jpg",
+    "title": "Bones, Barrels, and Broomsticks",
+    "desc": "A barrel of bones, a bundle of broomsticks, and Hermione near the doorway fill this corner of the alley."
+  },
+  {
+    "src": "images/booknook/47.jpg",
+    "title": "The Skeleton by the Stairs",
+    "desc": "A skeleton has found a seat on a crate beneath the stairs. The glowing red window makes this corner even spookier."
+  },
+  {
+    "src": "images/booknook/17.jpg",
+    "title": "The Hidden Staircase",
+    "desc": "Tiny doors, winding stairs, and Ron Weasley on the landing add another layer of detail above the alley."
+  },
+  {
+    "src": "images/booknook/49.jpg",
+    "title": "The Daily Prophet Sign",
+    "desc": "There is even a tiny Daily Prophet sign hanging beside the bright blue window."
+  },
+  {
+    "src": "images/booknook/31.jpg",
+    "title": "A Glowing Streetlamp",
+    "desc": "Even the little streetlamp has its own character. Its warm light brings out the texture of the weathered wood."
+  },
+  {
+    "src": "images/booknook/43.jpg",
+    "title": "Colorful Windows and a Winding Pipe",
+    "desc": "Did you spot the winding pipe? It snakes up the brick wall beside the tall, green-lit window."
+  },
+  {
+    "src": "images/booknook/5.jpg",
+    "title": "A Glimpse Down the Passage",
+    "desc": "This close-up makes the alley feel as though it goes on forever. The soft focus adds to the mysterious atmosphere."
+  },
+  {
+    "src": "images/booknook/10.jpg",
+    "title": "Building the Wooden Facade",
+    "desc": "Here is one of the building fronts before it became part of the alley. You can see the weathered siding, tiny doors, and window frames up close."
+  },
+  {
+    "src": "images/booknook/12.jpg",
+    "title": "Building the Brick Wall",
+    "desc": "Here is the brick wall before it was added to the scene. It is easier to appreciate the textured brickwork and winding pipe in this view."
+  }
 ]
