@@ -7,10 +7,6 @@
     <style>
         /* --- GLOBAL PALETTE & RESET --- */
         body {
-            background-image: url('images/grass-bg.jpg');
-            background-size: cover;       /* Ensures it fills the screen perfectly */
-            background-position: center;  /* Centers the grass texture */
-            background-attachment: fixed;  /* Keeps it fixed while scrolling (like Wix) */
             background-color: #0b0c10;
             color: #ffffff;
             margin: 0;
@@ -35,15 +31,42 @@
             margin: 0 auto;
         }
 
+        /* --- DEFAULT DESKTOP SIZES (5 and 4 wide) --- */
+        :root {
+            --hex-w: 200px;
+            --hex-h: 226px;
+            --hex-img-w: 192px;
+            --hex-img-h: 218px;
+            --hex-row-margin: -54px;
+        }
+
+        /* --- MOBILE & TABLET SIZES (Dynamically activated) --- */
+        @media (max-width: 768px) {
+            :root {
+                --hex-w: 130px;
+                --hex-h: 147px;
+                --hex-img-w: 124px;
+                --hex-img-h: 141px;
+                --hex-row-margin: -34px; /* Pulls rows tighter for smaller shapes */
+            }
+            body {
+                padding: 20px 5px;
+            }
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+        }
+
         .hex-row {
             display: flex;
             justify-content: center;
-            margin-bottom: -54px; /* Pulls rows tightly vertical to lock shapes */
+            margin-bottom: var(--hex-row-margin); /* Pulls rows tightly vertical to lock shapes */
         }
 
         .hex-border {
-            width: 200px;
-            height: 226px;
+            width: var(--hex-w);
+            height: var(--hex-h);
             background-color: rgba(255, 255, 255, 0.85); /* Clean white lines */
             margin: 0 -2px; /* Moves shapes horizontally to overlap edges completely */
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
@@ -62,8 +85,8 @@
         }
 
         .hex-item {
-            width: 192px; /* Reveals a thin 4px matching border boundary */
-            height: 218px;
+            width: var(--hex-img-w);
+            height: var(--hex-img-h);
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
             overflow: hidden;
             background-color: #1a1a1a;
@@ -74,6 +97,7 @@
             height: 100%;
             object-fit: cover; /* Centers & scales your shapes without stretching */
         }
+
 
         /* --- INTERACTIVE WIX-STYLE LIGHTBOX MODAL --- */
         .lightbox {
@@ -200,9 +224,13 @@
         // 2. ALTERNATING MULTI-ROW STRUCTURAL BUILDER (5 items, then 4 items, etc.)
         function buildHexagonHoneycombGrid() {
             const container = document.getElementById('hexGrid');
+            container.innerHTML = ""; // Clear out previous layout if window resizes
             let activeRowElement;
             
-            const patternLayoutSequence =[5,4]; 
+            // Check window width. If under 768px, use 3 and 2 items per row. Otherwise use 5 and 4.
+            const isMobile = window.innerWidth <= 768;
+            const patternLayoutSequence = isMobile ? [3, 2] :; 
+            
             let layoutSequenceIndex = 0;
             let currentBuiltItemsInRow = 0;
 
@@ -213,7 +241,6 @@
                     container.appendChild(activeRowElement);
                 }
 
-                // Inject dynamic click tracking using array positions
                 const hexNodeHTML = `
                     <div class="hex-border" onclick="openLightbox(${index})">
                         <div class="hex-item">
@@ -224,13 +251,17 @@
                 activeRowElement.innerHTML += hexNodeHTML;
                 currentBuiltItemsInRow++;
 
-                // If row limit reached, loop sequence back between rows of 5 and 4
+                // If row limit reached, loop sequence back between alternating row capacities
                 if (currentBuiltItemsInRow === patternLayoutSequence[layoutSequenceIndex]) {
                     currentBuiltItemsInRow = 0;
                     layoutSequenceIndex = (layoutSequenceIndex + 1) % patternLayoutSequence.length;
                 }
             });
         }
+
+// Automatically recalculate grid layout if a tablet or mobile screen rotates sideways
+window.addEventListener('resize', buildHexagonHoneycombGrid);
+
 
         // 3. EVENT SYSTEM & INTERACTIVE VIEWER CONTROLLER
         function openLightbox(index) {
