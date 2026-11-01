@@ -229,7 +229,7 @@
         let currentIndex = 0;
 
         // 1. DYNAMIC DATA FETCH LOADER
-        fetch('gallery-data.json')
+        fetch('bugs-data.json')
             .then(response => {
                 if (!response.ok) throw new Error("JSON metadata tracking ledger could not resolve.");
                 return response.json();
