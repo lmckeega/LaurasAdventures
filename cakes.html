@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laura's Adventures - Jamie's Cakes</title>
+
+    <!-- Shared site navigation and photo viewer -->
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="lightbox.css">
+    <script src="navigation.js" defer></script>
+    <script src="lightbox.js" defer></script>
+
+    <style>
+        /* --- CAKES PAGE ONLY --- */
+        * { box-sizing: border-box; }
+
+        html { min-height: 100%; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #191a39, #202344 50%, #171b39);
+        }
+
+        /* The header from navigation.css is fixed at the top of the screen. */
+        .cakes-main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 121px 20px 48px;
+        }
+
+        /* Accessible page name without inserting an extra heading above the photos. */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Wix-style rounded-square photos, five per row on desktop. */
+        .cakes-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .cake-tile {
+            display: block;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            padding: 0;
+            border: 0;
+            border-radius: 22%;
+            background-color: #333650;
+            cursor: pointer;
+            transition: transform 180ms ease, box-shadow 180ms ease;
+        }
+
+        .cake-tile img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cake-tile:hover {
+            transform: scale(1.035);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+        }
+
+        .cake-tile:focus-visible {
+            outline: 3px solid white;
+            outline-offset: 4px;
+        }
+
+        .gallery-status {
+            display: none;
+            max-width: 620px;
+            margin: 22px auto;
+            color: #e5e5f4;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .cakes-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 600px) {
+            .cakes-main { padding: 74px 12px 32px; }
+            .cakes-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cake-tile { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation is filled automatically by navigation.js using menu.json. -->
+    <div id="global-navigation-hub"></div>
+
+    <main class="cakes-main">
+        <h1 class="visually-hidden">Jamie's Cakes</h1>
+        <div id="cakesGrid" class="cakes-grid" aria-label="Cake photo gallery"></div>
+        <p id="galleryStatus" class="gallery-status" role="status"></p>
+    </main>
+
+    <!-- Same photo viewer markup used on bugs.html. -->
+    <div id="myLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <span class="close-btn" role="button" tabindex="0" onclick="closeLightbox()" aria-label="Close photo viewer">&times;</span>
+        <span class="nav-btn prev-btn" role="button" tabindex="0" onclick="changeImage(-1)" aria-label="Previous photo">&#10094;</span>
+        <span class="nav-btn next-btn" role="button" tabindex="0" onclick="changeImage(1)" aria-label="Next photo">&#10095;</span>
+        <img id="lightboxImg" class="lightbox-content" src="" alt="Active photo">
+        <div class="lightbox-caption">
+            <div id="captionTitle" class="caption-title"></div>
+            <div id="captionDesc" class="caption-desc"></div>
+        </div>
+    </div>
+
+    <script>
+        /* --- CAKES PHOTO GALLERY DATA AND THUMBNAILS --- */
+        document.addEventListener('DOMContentLoaded', function () {
+            const gallery = document.getElementById('cakesGrid');
+            const status = document.getElementById('galleryStatus');
+
+            function showMessage(message) {
+                status.textContent = message;
+                status.style.display = 'block';
+            }
+
+            fetch('cakes-data.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Could not load cakes-data.json (HTTP ' + response.status + ')');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data)) {
+                        throw new Error('cakes-data.json must contain a JSON array.');
+                    }
+
+                    // Only use photo entries that have a valid image path.
+                    const photos = data.filter(photo =>
+                        photo && typeof photo.src === 'string' && photo.src.trim()
+                    );
+
+                    // Register the same photographs with the shared lightbox.
+                    setLightboxImages(photos);
+
+                    if (photos.length === 0) {
+                        showMessage('No cake photographs have been added yet. Add entries to cakes-data.json to display the gallery.');
+                        return;
+                    }
+
+                    const fragment = document.createDocumentFragment();
+                    photos.forEach((photo, index) => {
+                        const tile = document.createElement('button');
+                        tile.type = 'button';
+                        tile.className = 'cake-tile';
+                        tile.setAttribute('aria-label', 'View ' + (photo.title || ('cake photo ' + (index + 1))));
+
+                        const img = document.createElement('img');
+                        img.src = photo.src;
+                        img.alt = photo.title || ('Cake photo ' + (index + 1));
+                        img.loading = 'lazy';
+                        img.decoding = 'async';
+
+                        tile.appendChild(img);
+                        tile.addEventListener('click', () => openLightbox(index));
+                        fragment.appendChild(tile);
+                    });
+
+                    gallery.replaceChildren(fragment);
+                })
+                .catch(error => {
+                    console.error('Error loading cake gallery:', error);
+                    showMessage('The cake gallery could not be loaded. Check cakes-data.json and the browser console.');
+                });
+        });
+    </script>
+</body>
+</html>

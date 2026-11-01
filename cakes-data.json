@@ -1,0 +1,23 @@
+
+[
+    {
+        "src": "images/cakes/mom2.jpg",
+        "title": "Mom",
+        "desc": "My Birthday Cake"
+    },
+    {
+        "src": "images/cakes/fathers day.jpg",
+        "title": "Fathers Day Cake",
+        "desc": "Fathers Day cake"
+    },
+    {
+        "src": "images/cakes/hamburger.jpg",
+        "title": "Hamburger Cake",
+        "desc": "Hamburger cake"
+    },
+    {
+        "src": "images/cakes/Jack in the Box cake-1.jpg",
+        "title": "Jack in the Box Cake",
+        "desc": "Jack in the Box cake"
+    }
+]
