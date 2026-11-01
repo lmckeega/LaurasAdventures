@@ -48,11 +48,11 @@
         /* --- MOBILE & TABLET SIZES (Dynamically activated) --- */
         @media (max-width: 768px) {
             :root {
-                --hex-w: 130px;
-                --hex-h: 147px;
-                --hex-img-w: 124px;
-                --hex-img-h: 141px;
-                --hex-row-margin: -34px; /* Pulls rows tighter for smaller shapes */
+                --hex-w: min(30vw, 130px);
+                --hex-h: calc(var(--hex-w) * 1.13);
+                --hex-img-w: calc(var(--hex-w) - 6px);
+                --hex-img-h: calc(var(--hex-h) - 6px);
+                --hex-row-margin: calc(var(--hex-h) * -0.24);
             }
             body {
                 padding: 20px 5px;
@@ -180,12 +180,15 @@
         /* --- RESPONSIVE FALLBACKS FOR MOBILE SCREENS --- */
         @media (max-width: 768px) {
             .hex-row {
-                flex-wrap: wrap;
-                margin-bottom: 0; /* Drop the layout nesting overlay on mobile rows */
+                flex-wrap: nowrap;
+                margin-bottom: var(--hex-row-margin);
             }
+
             .hex-border {
-                margin: 10px; /* Separates them cleanly down standard scrolling viewports */
+                margin: 0 -2px;
+                flex-shrink: 0;
             }
+
             .nav-btn { font-size: 40px; padding: 10px; }
             .prev-btn { left: 5px; }
             .next-btn { right: 5px; }
@@ -313,7 +316,7 @@ window.addEventListener('resize', buildHexagonHoneycombGrid);
             if (event.key === "ArrowRight") changeImage(1);
             if (event.key === "ArrowLeft") changeImage(-1);
         });
-        
+
     </script>
 
 </body>
