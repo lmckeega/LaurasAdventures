@@ -194,6 +194,7 @@
 
     </style>
     <link rel="stylesheet" href="navigation.css">
+    <script src="navigation.js" defer></script>
 </head>
 <body>
     <!-- THE AUTOMATIC MENU PLACEHOLDER -->
@@ -312,100 +313,7 @@ window.addEventListener('resize', buildHexagonHoneycombGrid);
             if (event.key === "ArrowRight") changeImage(1);
             if (event.key === "ArrowLeft") changeImage(-1);
         });
-        // MOBILE HAMBURGER MENU DROPDOWN CONTROLLER
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuToggle = document.getElementById("menuToggle");
-            const navMenu = document.getElementById("navMenu");
-
-            if (menuToggle && navMenu) {
-                menuToggle.addEventListener("click", function() {
-                    // Toggles the custom visibility modifier state utility class
-                    navMenu.classList.toggle("open");
-                });
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const navHub = document.getElementById("global-navigation-hub");
-            if (!navHub) return;
-
-            // 1. Fetch our centralized menu blueprint text file
-            fetch('menu.json')
-                .then(response => response.json())
-                .then(menuData => {
-                    // Get current file path name (e.g., "bugs.html") to handle auto-highlights
-                    const currentFilename = window.location.pathname.split("/").pop() || "index.html";
-
-                    // 2. Generate the base header skeleton structural template
-                    let headerHTML = `
-                        <header class="site-header">
-                            <div class="header-title">Laura's Adventures</div>
-                            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
-                                <span></span><span></span><span></span>
-                            </button>
-                            <nav class="nav-menu" id="navMenu">
-                    `;
-
-                    // 3. Loop through json nodes and build individual elements dynamically
-                    menuData.forEach(node => {
-                        if (node.type === "link") {
-                            const isActive = currentFilename === node.href ? "active" : "";
-                            headerHTML += `<a href="${node.href}" class="nav-link ${isActive}">${node.text}</a>`;
-                        } 
-                        else if (node.type === "dropdown") {
-                            // Check if any sub-links inside this dropdown match our active page file
-                            const hasActiveChild = node.items.some(sub => currentFilename === sub.href);
-                            const parentActive = hasActiveChild ? "active" : "";
-
-                            headerHTML += `
-                                <div class="dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle ${parentActive}">${node.text}</a>
-                                    <div class="dropdown-content">
-                            `;
-
-                            node.items.forEach(sub => {
-                                const isSubActive = currentFilename === sub.href ? "active-sub" : "";
-                                headerHTML += `<a href="${sub.href}" class="${isSubActive}">${sub.text}</a>`;
-                            });
-
-                            headerHTML += `</div></div>`; // Close dropdown structural blocks
-                        }
-                    });
-
-                    headerHTML += `</nav></header>`; // Close main header element container
-                    navHub.innerHTML = headerHTML;   // Inject into our live page placeholder!
-
-                    // 4. Fire up the mobile tap action click handlers
-                    initializeMobileNavigationEngines();
-                })
-                .catch(err => console.error("Error drawing unified site master menu layout:", err));
-        });
-
-        // MOBILE RESPONSIVE HAMBURGER ACCORDION CODE
-        function initializeMobileNavigationEngines() {
-            const menuToggle = document.getElementById("menuToggle");
-            const navMenu = document.getElementById("navMenu");
-            const dropdowns = document.querySelectorAll(".dropdown");
-
-            if (menuToggle && navMenu) {
-                menuToggle.addEventListener("click", function() {
-                    navMenu.classList.toggle("open");
-                });
-            }
-
-            dropdowns.forEach(dropdown => {
-                const toggleLink = dropdown.querySelector(".dropdown-toggle");
-                if (toggleLink) {
-                    toggleLink.addEventListener("click", function(event) {
-                        if (window.innerWidth <= 768) {
-                            event.preventDefault(); // Lock regular hyperlinking
-                            dropdown.classList.toggle("mobile-open"); // Expand accordion drawer
-                        }
-                    });
-                }
-            });
-        }
-
+        
     </script>
 
 </body>
