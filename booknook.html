@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A photo tour of the Knockturn Alley book nook, with close-up views of its miniature details.">
+    <title>Laura's Adventures - Knockturn Alley Book Nook</title>
+
+    <!-- Shared site navigation and the same photo viewer as Bugs and Cakes. -->
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="lightbox.css">
+    <script src="navigation.js" defer></script>
+    <script src="lightbox.js" defer></script>
+
+    <style>
+        /* --- BOOK NOOK PAGE ONLY --- */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: #0c0d11;
+            color: #f7f7f7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* navigation.css uses a fixed header, so reserve space beneath it. */
+        .booknook-main {
+            width: min(100% - 40px, 1060px);
+            margin: 0 auto;
+            padding: 151px 0 68px;
+        }
+
+        .page-intro {
+            max-width: 850px;
+            margin: 0 auto 28px;
+            text-align: center;
+        }
+
+        .page-kicker {
+            display: block;
+            margin-bottom: 10px;
+            color: #b7af9a;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-weight: normal;
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            line-height: 1.13;
+            margin: 0;
+        }
+
+        .page-subtitle {
+            color: #bebebe;
+            line-height: 1.6;
+            margin: 12px auto 0;
+            font-size: 1rem;
+        }
+
+        /* The first photograph in booknook-data.json becomes the featured image. */
+        .featured-photo {
+            width: min(100%, 940px);
+            margin: 0 auto 58px;
+        }
+
+        .photo-button {
+            width: 100%;
+            display: block;
+            padding: 0;
+            border: 0;
+            background: #202027;
+            color: inherit;
+            text-align: left;
+            cursor: zoom-in;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .photo-button img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .photo-button:focus-visible {
+            outline: 3px solid #d7c7a4;
+            outline-offset: 4px;
+        }
+
+        .featured-photo .photo-button {
+            border: 1px solid #31313a;
+        }
+
+        .featured-caption {
+            margin: 14px auto 0;
+            max-width: 800px;
+            text-align: center;
+            color: #c8c8c8;
+            line-height: 1.55;
+            font-size: 0.99rem;
+        }
+
+        .section-heading {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            margin: 0 0 23px;
+            color: #e5e2da;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.6rem;
+            font-weight: normal;
+        }
+
+        .section-heading::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #33353e;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 35px 28px;
+        }
+
+        .detail-photo { margin: 0; min-width: 0; }
+
+        .detail-photo .photo-button {
+            border: 1px solid #282832;
+            transition: border-color 0.18s ease, transform 0.18s ease;
+        }
+
+        .detail-photo .photo-button:hover {
+            border-color: #a7a08c;
+            transform: translateY(-2px);
+        }
+
+        /* Use a uniform 4:3 presentation for details; full image remains in the lightbox. */
+        .detail-photo img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .detail-caption { padding-top: 12px; }
+
+        .detail-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .detail-desc {
+            margin: 5px 0 0;
+            color: #bababa;
+            line-height: 1.55;
+            font-size: 0.93rem;
+        }
+
+        .gallery-status {
+            max-width: 640px;
+            margin: 25px auto;
+            color: #ddd;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .booknook-main {
+                width: min(100% - 24px, 600px);
+                padding-top: 92px;
+                padding-bottom: 40px;
+            }
+            .page-intro { margin-bottom: 22px; }
+            .featured-photo { margin-bottom: 42px; }
+            .details-grid {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 28px;
+            }
+            .section-heading { font-size: 1.4rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .detail-photo .photo-button { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="global-navigation-hub"></div>
+
+    <main class="booknook-main">
+        <header class="page-intro">
+            <span class="page-kicker">Photo showcase</span>
+            <h1 class="page-title">Knockturn Alley Book Nook</h1>
+            <p class="page-subtitle">Explore the miniature scene and the little details tucked into the alley.</p>
+        </header>
+
+        <section aria-label="Featured photograph">
+            <figure class="featured-photo" id="featuredPhoto"></figure>
+        </section>
+
+        <section aria-labelledby="detailsHeading" id="detailsSection">
+            <h2 class="section-heading" id="detailsHeading">A closer look</h2>
+            <div class="details-grid" id="detailsGrid"></div>
+        </section>
+
+        <p class="gallery-status" id="galleryStatus" role="status" hidden></p>
+    </main>
+
+    <!-- Shared lightbox markup, matching cakes.html and bugs.html. -->
+    <div id="myLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <span class="close-btn" role="button" tabindex="0" onclick="closeLightbox()" aria-label="Close photo viewer">&times;</span>
+        <span class="nav-btn prev-btn" role="button" tabindex="0" onclick="changeImage(-1)" aria-label="Previous photo">&#10094;</span>
+        <span class="nav-btn next-btn" role="button" tabindex="0" onclick="changeImage(1)" aria-label="Next photo">&#10095;</span>
+        <img id="lightboxImg" class="lightbox-content" src="" alt="Active photo">
+        <div class="lightbox-caption">
+            <div id="captionTitle" class="caption-title"></div>
+            <div id="captionDesc" class="caption-desc"></div>
+        </div>
+    </div>
+
+    <script>
+        /* The first JSON photo is featured; remaining photos appear two across. */
+        document.addEventListener('DOMContentLoaded', function () {
+            const feature = document.getElementById('featuredPhoto');
+            const grid = document.getElementById('detailsGrid');
+            const detailsSection = document.getElementById('detailsSection');
+            const status = document.getElementById('galleryStatus');
+
+            function showMessage(message) {
+                status.textContent = message;
+                status.hidden = false;
+            }
+
+            function makePhotoButton(photo, index, featured) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'photo-button';
+                button.setAttribute('aria-label', 'Enlarge ' + (photo.title || 'photograph'));
+
+                const img = document.createElement('img');
+                img.src = photo.src;
+                img.alt = photo.title || 'Book nook photo';
+                img.loading = featured ? 'eager' : 'lazy';
+                img.decoding = 'async';
+                button.appendChild(img);
+                button.addEventListener('click', () => openLightbox(index));
+                return button;
+            }
+
+            fetch('booknook-data.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Could not load booknook-data.json (HTTP ' + response.status + ')');
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data)) throw new Error('booknook-data.json must be a JSON array');
+                    const photos = data.filter(photo => photo && typeof photo.src === 'string' && photo.src.trim());
+                    setLightboxImages(photos);
+
+                    if (!photos.length) {
+                        showMessage('No photos found. Add photographs to booknook-data.json.');
+                        detailsSection.hidden = true;
+                        return;
+                    }
+
+                    // Main overview image.
+                    const first = photos[0];
+                    feature.appendChild(makePhotoButton(first, 0, true));
+                    if (first.desc) {
+                        const caption = document.createElement('figcaption');
+                        caption.className = 'featured-caption';
+                        caption.textContent = first.desc;
+                        feature.appendChild(caption);
+                    }
+
+                    // Smaller detail photographs.
+                    photos.slice(1).forEach((photo, position) => {
+                        const figure = document.createElement('figure');
+                        figure.className = 'detail-photo';
+                        figure.appendChild(makePhotoButton(photo, position + 1, false));
+
+                        const caption = document.createElement('figcaption');
+                        caption.className = 'detail-caption';
+                        if (photo.title) {
+                            const title = document.createElement('h3');
+                            title.className = 'detail-title';
+                            title.textContent = photo.title;
+                            caption.appendChild(title);
+                        }
+                        if (photo.desc) {
+                            const description = document.createElement('p');
+                            description.className = 'detail-desc';
+                            description.textContent = photo.desc;
+                            caption.appendChild(description);
+                        }
+                        if (caption.childElementCount) figure.appendChild(caption);
+                        grid.appendChild(figure);
+                    });
+                    if (photos.length === 1) detailsSection.hidden = true;
+                })
+                .catch(error => {
+                    console.error('Book nook gallery:', error);
+                    showMessage('Could not load the book nook gallery. Check booknook-data.json and the image paths.');
+                    detailsSection.hidden = true;
+                });
+        });
+    </script>
+</body>
+</html>
