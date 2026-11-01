@@ -119,21 +119,150 @@
             p { font-size: 1rem; }
             .enter-btn { padding: 12px 28px; font-size: 1rem; }
         }
+
+        /* --- SITE HEADER & RESPONSIVE NAVIGATION --- */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #2c444e; /* Matte slate-blue matching your screenshot */
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000; /* Keeps menu safely above background sliders or grids */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header-title {
+            font-family: Georgia, serif; /* Elegant classic font match */
+            font-size: 2.5rem;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: color 0.2s ease;
+            opacity: 0.85;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            opacity: 1;
+            color: #e5e5e5;
+            text-shadow: 0 0 8px rgba(255,255,255,0.4);
+        }
+
+        /* Hidden hamburger menu button on desktop computers */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            width: 30px;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        /* --- MOBILE COMPACT TABLET VIEWPORT CODES --- */
+        @media (max-width: 768px) {
+            .site-header {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 12px 20px;
+            }
+
+            .header-title {
+                font-size: 1.6rem;
+                margin-bottom: 0;
+            }
+
+            .menu-toggle {
+                display: flex; /* Reveal mobile hamburger icon button */
+            }
+
+            /* Transform navigation layout into a mobile dropdown drawer curtain */
+            .nav-menu {
+                display: none; /* Initially closed hidden */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #2c444e;
+                flex-direction: column;
+                gap: 0;
+                padding: 10px 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            }
+
+            /* Active utility state when the toggle button is clicked open */
+            .nav-menu.open {
+                display: flex;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+                border-top: 1px solid rgba(255,255,255,0.05);
+            }
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- THE DYNAMIC NAVIGATION BAR -->
+    <header class="site-header">
+        <div class="header-title">Laura's Adventures</div>
+        
+        <!-- Mobile Hamburger Toggle Icon Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <nav class="nav-menu" id="navMenu">
+            <!-- Replace href values with your actual page filenames -->
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="44cct.html" class="nav-link">44CCT</a>
+            <a href="travels.html" class="nav-link">Travels</a>
+            <a href="gallery.html" class="nav-link active">Photos</a>
+            <a href="about.html" class="nav-link">About</a>
+        </nav>
+    </header>
+
 
     <!-- BACKGROUND IMAGES (Populated dynamically by JavaScript) -->
     <div id="slider" class="slider-container"></div>
     <div class="slider-overlay"></div>
 
     <!-- FOREGROUND TEXT AND BUTTON -->
-    <div class="content-layer">
-        <h1>LAURA'S ADVENTURES</h1>
-        <p>A collection of wildlife photography, videos, and field notes</p>
-        
-        <a href="bugs.html" class="enter-btn">ENTER GALLERY</a>
-    </div>
+
 
     <script>
         // Set rotation timer: 5000 milliseconds = 5 seconds per slide
@@ -189,6 +318,20 @@
                 slides[currentSlideIndex].classList.add('active');
             }, slideIntervalTime);
         }
+
+        // MOBILE HAMBURGER MENU DROPDOWN CONTROLLER
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", function() {
+                    // Toggles the custom visibility modifier state utility class
+                    navMenu.classList.toggle("open");
+                });
+            }
+        });
+
     </script>
 
 </body>
