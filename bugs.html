@@ -62,7 +62,7 @@
                 margin-bottom: 30px;
             }
             .hex-grid {
-                padding-top: 110px; /* Less spacing needed for the shorter mobile menu */
+                padding-top: 0px; /* Less spacing needed for the shorter mobile menu */
             }
         }
 
@@ -299,6 +299,77 @@
                 border-top: 1px solid rgba(255,255,255,0.05);
             }
         }
+
+
+        /* --- DESKTOP DROPDOWN MENUS --- */
+
+        .dropdown {
+            position: relative;
+        }
+
+        /* Hide dropdown until needed */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0b0b0b;
+            min-width: 140px;
+            padding: 5px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 2000;
+        }
+
+        /* Individual dropdown menu items */
+        .dropdown-content a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            padding: 8px 12px;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+
+        /* Highlight items on hover */
+        .dropdown-content a:hover,
+        .dropdown-content a.active-sub {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        /* Desktop: show dropdown when hovering */
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content,
+            .dropdown:focus-within .dropdown-content {
+                display: block;
+            }
+        }
+
+        /* Mobile: expand dropdown when tapped */
+        @media (max-width: 768px) {
+            .dropdown {
+                width: 100%;
+            }
+
+            .dropdown-content {
+                position: static;
+                transform: none;
+                min-width: 0;
+                width: 100%;
+                box-shadow: none;
+            }
+
+            .dropdown.mobile-open .dropdown-content {
+                display: block;
+            }
+
+            .dropdown-content a {
+                padding: 12px 20px;
+            }
+        }
+
 
     </style>
 </head>
