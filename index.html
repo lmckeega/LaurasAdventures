@@ -121,6 +121,37 @@
         }
 
 
+        /* --- MOBILE HOME PAGE SLIDESHOW --- */
+        @media (max-width: 768px) {
+
+            .slide {
+                overflow: hidden;
+            }
+
+            /* Blurred full-screen copy of photo */
+            .slide::before {
+                content: "";
+                position: absolute;
+                inset: -30px;
+                background-image: inherit;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                filter: blur(22px) brightness(0.7);
+            }
+
+            /* Sharp, complete photo in foreground */
+            .slide::after {
+                content: "";
+                position: absolute;
+                inset: 0;
+                background-image: inherit;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
 
 
     </style>
