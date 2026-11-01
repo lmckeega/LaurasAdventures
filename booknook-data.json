@@ -22,7 +22,7 @@
     {
         "src": "images/booknook/34.jpg",
         "title": "The Diagon Alley Entrance",
-        "desc": "An arched passage marked by a tiny Diagon Alley sign sits among brick walls, shop windows, and other miniature details."
+        "desc": "An arched passage marked by a tiny Diagon Alley sign sits among brick walls and shop windows. Look closely for the Mail Owl flying toward you!"
     },
     {
         "src": "images/booknook/29.jpg",
@@ -36,13 +36,13 @@
     },
     {
         "src": "images/booknook/52.jpg",
-        "title": "Owls in the Window",
-        "desc": "Look closely at the lighted windowpanes to spot the tiny owls peering out from behind the glass."
+        "title": "Skulls in the Window",
+        "desc": "Look closely at the lighted windowpanes to spot the skulls peering out from behind the glass."
     },
     {
         "src": "images/booknook/22.jpg",
         "title": "Bones, Barrels, and Broomsticks",
-        "desc": "A barrel of bones, a bundle of broomsticks, and a figure near the doorway fill this corner of the alley."
+        "desc": "A barrel of bones, a bundle of broomsticks, and Hermione near the doorway fill this corner of the alley."
     },
     {
         "src": "images/booknook/47.jpg",
@@ -52,7 +52,7 @@
     {
         "src": "images/booknook/17.jpg",
         "title": "The Hidden Staircase",
-        "desc": "Tiny doors, winding stairs, and a figure on the landing add another layer of detail above the alley."
+        "desc": "Tiny doors, winding stairs, and Wesley on the landing add another layer of detail above the alley."
     },
     {
         "src": "images/booknook/49.jpg",
