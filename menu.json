@@ -8,7 +8,7 @@
         "type": "dropdown",
         "text": "44CCT",
         "items": [
-            { "text": "Videos", "href": "videos.html" }
+            { "text": "Videos", "href": "44cct_videos.html" }
         ]
     },
     {

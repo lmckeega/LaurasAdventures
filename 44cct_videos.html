@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Watch 44CCT videos on Laura's Adventures.">
+    <title>Laura's Adventures - 44CCT Videos</title>
+
+    <!-- Shared menu. The video layout and its JavaScript belong only to this page. -->
+    <link rel="stylesheet" href="navigation.css">
+    <script src="navigation.js" defer></script>
+
+    <style>
+        /* --- VIDEOS PAGE ONLY --- */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { min-height: 100%; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: #f7f7f7;
+            background: #0c0d12;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Shared navigation is fixed at the top. */
+        .videos-main {
+            width: min(100% - 40px, 1050px);
+            margin: 0 auto;
+            padding: 151px 0 72px;
+        }
+        .page-intro { text-align: center; margin: 0 auto 30px; }
+        .page-kicker {
+            display: block;
+            margin: 0 0 8px;
+            font-size: .75rem;
+            font-weight: 700;
+            color: #c5b99d;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+        .page-title {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.1rem, 5vw, 3.1rem);
+            font-weight: 400;
+        }
+        .page-subtitle {
+            margin: 10px auto 0;
+            color: #c6c6cc;
+            line-height: 1.55;
+        }
+
+        /* One embedded player at a time: fast page loading and easy browsing. */
+        .video-player-section { max-width: 920px; margin: 0 auto 44px; scroll-margin-top: 130px; }
+        .video-frame-wrap {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            border: 1px solid #393e4c;
+            background: #171b28;
+            box-shadow: 0 10px 28px rgba(0,0,0,.35);
+        }
+        .video-frame-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            text-align: center;
+            color: #d9dde6;
+            padding: 26px;
+            background: radial-gradient(circle at 50% 38%, #35465b, #141721 72%);
+        }
+        .placeholder-play {
+            width: 72px;
+            height: 72px;
+            border: 2px solid rgba(255,255,255,.7);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: 2rem;
+            padding-left: 4px;
+        }
+        .video-placeholder p { margin: 0; line-height: 1.5; }
+        .playing-info { padding: 16px 3px 0; }
+        .playing-info h2 { font-size: 1.35rem; margin: 0 0 6px; }
+        .playing-info p { margin: 0; line-height: 1.55; color: #c2c2cb; }
+
+        .list-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+        .list-header h2 {
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.65rem;
+            font-weight: 400;
+        }
+        .list-header::after { content: ''; flex: 1; height: 1px; background: #333943; }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .video-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            min-width: 0;
+            min-height: 116px;
+            padding: 12px;
+            border: 1px solid #323847;
+            border-radius: 11px;
+            background: #1b202b;
+            color: inherit;
+            cursor: pointer;
+            text-align: left;
+            font: inherit;
+            transition: background .15s ease, border-color .15s ease;
+        }
+        .video-card:hover { background: #252d3b; border-color: #8796a6; }
+        .video-card.active { background: #293745; border-color: #c7b78e; }
+        .video-card:focus-visible { outline: 3px solid #e2d0a6; outline-offset: 3px; }
+        .video-thumb {
+            position: relative;
+            width: 143px;
+            flex: 0 0 143px;
+            aspect-ratio: 16 / 9;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(140deg, #354e60, #101722);
+            overflow: hidden;
+            border-radius: 7px;
+        }
+        .video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+        .video-thumb::after {
+            content: '\25B6';
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: 1.45rem;
+            text-shadow: 0 1px 4px #000;
+            background: rgba(0,0,0,.2);
+        }
+        .video-card-content { display: block; min-width: 0; }
+        .video-card-title {
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 650;
+            line-height: 1.35;
+            margin-bottom: 5px;
+        }
+        .video-card-desc {
+            display: block;
+            color: #bfc5ce;
+            font-size: .89rem;
+            line-height: 1.4;
+        }
+        .video-card-time {
+            display: block;
+            color: #c9b991;
+            font-size: .79rem;
+            margin-top: 7px;
+        }
+        .video-status {
+            color: #c9cbd0;
+            line-height: 1.6;
+            text-align: center;
+            padding: 22px 0;
+        }
+        [hidden] { display: none !important; }
+
+        @media (max-width: 768px) {
+            .videos-main { width: min(100% - 24px, 650px); padding: 92px 0 42px; }
+            .video-player-section { scroll-margin-top: 83px; margin-bottom: 32px; }
+            .page-intro { margin-bottom: 23px; }
+            .video-grid { grid-template-columns: minmax(0, 1fr); }
+            .list-header h2 { font-size: 1.45rem; }
+        }
+        @media (max-width: 420px) {
+            .video-card { gap: 11px; min-height: 100px; padding: 9px; }
+            .video-thumb { flex-basis: 112px; width: 112px; }
+            .video-card-title { font-size: .97rem; }
+            .video-card-desc { font-size: .82rem; }
+            .placeholder-play { width: 54px; height: 54px; font-size: 1.5rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .video-card { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="global-navigation-hub"></div>
+
+    <main class="videos-main">
+        <header class="page-intro">
+            <span class="page-kicker">44CCT</span>
+            <h1 class="page-title">Videos</h1>
+            <p class="page-subtitle">Choose a video below to watch it here.</p>
+        </header>
+
+        <section id="playerSection" class="video-player-section" aria-label="Video player">
+            <div class="video-frame-wrap">
+                <div id="videoPlaceholder" class="video-placeholder">
+                    <div class="placeholder-play" aria-hidden="true">&#9654;</div>
+                    <p id="placeholderMessage">Select a video from the list below to start watching.</p>
+                </div>
+                <iframe id="videoFrame" title="Selected ScreenPal video" loading="lazy"
+                        allow="autoplay; fullscreen; picture-in-picture" allowfullscreen hidden></iframe>
+            </div>
+            <div id="playingInfo" class="playing-info" hidden>
+                <h2 id="playingTitle"></h2>
+                <p id="playingDescription"></p>
+            </div>
+        </section>
+
+        <section aria-labelledby="videoListHeading">
+            <div class="list-header"><h2 id="videoListHeading">Video library</h2></div>
+            <div id="videoList" class="video-grid"></div>
+            <p id="videoStatus" class="video-status" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <script>
+        /* Video titles and ScreenPal player URLs live in videos-data.json. */
+        document.addEventListener('DOMContentLoaded', function () {
+            const videoList = document.getElementById('videoList');
+            const videoStatus = document.getElementById('videoStatus');
+            const frame = document.getElementById('videoFrame');
+            const placeholder = document.getElementById('videoPlaceholder');
+            const placeholderMessage = document.getElementById('placeholderMessage');
+            const playingInfo = document.getElementById('playingInfo');
+            const playingTitle = document.getElementById('playingTitle');
+            const playingDescription = document.getElementById('playingDescription');
+            const playerSection = document.getElementById('playerSection');
+            let videos = [];
+
+            // Accept a ScreenPal embedded-player URL, NOT its ordinary watch-page URL.
+            function getPlayerUrl(value) {
+                if (typeof value !== 'string' || !value.trim()) return null;
+                try {
+                    const url = new URL(value.trim().replace(/&amp;/g, '&'));
+                    const host = url.hostname.toLowerCase();
+                    const allowedHost = host === 'screenpal.com' ||
+                        host.endsWith('.screenpal.com') ||
+                        host === 'screencasthost.com' ||
+                        host.endsWith('.screencasthost.com');
+                    if (url.protocol !== 'https:' || !allowedHost ||
+                        !/^\/player\/[a-zA-Z0-9_-]+/.test(url.pathname)) return null;
+                    return url.href;
+                } catch (_) {
+                    return null;
+                }
+            }
+
+            function selectVideo(index) {
+                const video = videos[index];
+                const url = getPlayerUrl(video.embedUrl);
+                if (!url) {
+                    videoStatus.textContent = 'This video needs a valid ScreenPal embed URL in videos-data.json.';
+                    return;
+                }
+                frame.src = url;
+                frame.title = video.title + ' — ScreenPal video';
+                frame.hidden = false;
+                placeholder.hidden = true;
+                playingInfo.hidden = false;
+                playingTitle.textContent = video.title;
+                playingDescription.textContent = video.description || '';
+                playingDescription.hidden = !video.description;
+                videoStatus.textContent = '';
+
+                videoList.querySelectorAll('.video-card').forEach((button, buttonIndex) => {
+                    const selected = buttonIndex === index;
+                    button.classList.toggle('active', selected);
+                    button.setAttribute('aria-pressed', String(selected));
+                });
+                playerSection.scrollIntoView({
+                    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                    block: 'start'
+                });
+            }
+
+            function createCard(video, index) {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'video-card';
+                button.setAttribute('aria-pressed', 'false');
+                button.setAttribute('aria-label', 'Watch ' + video.title);
+
+                const thumb = document.createElement('span');
+                thumb.className = 'video-thumb';
+                thumb.setAttribute('aria-hidden', 'true');
+                if (typeof video.thumbnail === 'string' && video.thumbnail.trim()) {
+                    const img = document.createElement('img');
+                    img.src = video.thumbnail;
+                    img.alt = '';
+                    img.loading = 'lazy';
+                    thumb.appendChild(img);
+                }
+
+                const details = document.createElement('span');
+                details.className = 'video-card-content';
+                const title = document.createElement('span');
+                title.className = 'video-card-title';
+                title.textContent = video.title;
+                details.appendChild(title);
+                if (video.description) {
+                    const desc = document.createElement('span');
+                    desc.className = 'video-card-desc';
+                    desc.textContent = video.description;
+                    details.appendChild(desc);
+                }
+                if (video.duration) {
+                    const duration = document.createElement('span');
+                    duration.className = 'video-card-time';
+                    duration.textContent = video.duration;
+                    details.appendChild(duration);
+                }
+                button.append(thumb, details);
+                button.addEventListener('click', function () { selectVideo(index); });
+                return button;
+            }
+
+            fetch('videos-data.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Could not load videos-data.json (HTTP ' + response.status + ')');
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data)) throw new Error('videos-data.json must contain an array.');
+                    videos = data.filter(video => video && typeof video.title === 'string' && video.title.trim());
+                    if (videos.length === 0) {
+                        videoStatus.textContent = 'No videos have been added yet. Add your ScreenPal videos to videos-data.json.';
+                        placeholderMessage.textContent = 'Videos will appear here when they are added.';
+                        return;
+                    }
+                    videos.forEach((video, index) => videoList.appendChild(createCard(video, index)));
+                    videoStatus.textContent = '';
+                })
+                .catch(error => {
+                    console.error('Unable to load video library:', error);
+                    videoStatus.textContent = 'Unable to load the video list. Check that videos-data.json is uploaded alongside videos.html.';
+                });
+        });
+    </script>
+</body>
+</html>
