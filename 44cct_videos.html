@@ -338,16 +338,16 @@
                 return button;
             }
 
-            fetch('videos-data.json')
+            fetch('44cct_videos-data.json')
                 .then(response => {
-                    if (!response.ok) throw new Error('Could not load videos-data.json (HTTP ' + response.status + ')');
+                    if (!response.ok) throw new Error('Could not load 44cct_videos-data.json (HTTP ' + response.status + ')');
                     return response.json();
                 })
                 .then(data => {
-                    if (!Array.isArray(data)) throw new Error('videos-data.json must contain an array.');
+                    if (!Array.isArray(data)) throw new Error('44cct_videos-data.json must contain an array.');
                     videos = data.filter(video => video && typeof video.title === 'string' && video.title.trim());
                     if (videos.length === 0) {
-                        videoStatus.textContent = 'No videos have been added yet. Add your ScreenPal videos to videos-data.json.';
+                        videoStatus.textContent = 'No videos have been added yet. Add your ScreenPal videos to 44cct_videos-data.json.';
                         placeholderMessage.textContent = 'Videos will appear here when they are added.';
                         return;
                     }
@@ -356,7 +356,7 @@
                 })
                 .catch(error => {
                     console.error('Unable to load video library:', error);
-                    videoStatus.textContent = 'Unable to load the video list. Check that videos-data.json is uploaded alongside videos.html.';
+                    videoStatus.textContent = 'Unable to load the video list. Check that 44cct_videos-data.json is uploaded alongside 44cct_videos.html.';
                 });
         });
     </script>
