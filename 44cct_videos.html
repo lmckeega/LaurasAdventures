@@ -238,7 +238,7 @@
     </main>
 
     <script>
-        /* Video titles and ScreenPal player URLs live in videos-data.json. */
+        /* Video titles and ScreenPal player URLs live in 44cct_videos-data.json. */
         document.addEventListener('DOMContentLoaded', function () {
             const videoList = document.getElementById('videoList');
             const videoStatus = document.getElementById('videoStatus');
@@ -273,7 +273,7 @@
                 const video = videos[index];
                 const url = getPlayerUrl(video.embedUrl);
                 if (!url) {
-                    videoStatus.textContent = 'This video needs a valid ScreenPal embed URL in videos-data.json.';
+                    videoStatus.textContent = 'This video needs a valid ScreenPal embed URL in 44cct_videos-data.json.';
                     return;
                 }
                 frame.src = url;
