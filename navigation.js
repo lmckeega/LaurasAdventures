@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const navHub = document.getElementById('global-navigation-hub');
     if (!navHub) return;
 
-    fetch('menu.json')
+    fetch('/menu.json')
         .then(response => {
             if (!response.ok) {
                 throw new Error('Could not load menu.json (HTTP ' + response.status + ')');
@@ -20,7 +20,11 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(menuData => {
             // Highlight the current page (including links inside dropdowns).
-            const currentFilename = window.location.pathname.split('/').pop() || 'index.html';
+            
+		const currentPath = window.location.pathname === '/'
+			? '/index.html'
+			: window.location.pathname;
+
 
             let headerHTML = `
                 <header class="site-header">
@@ -35,10 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             menuData.forEach(node => {
                 if (node.type === 'link') {
-                    const isActive = currentFilename === node.href ? 'active' : '';
+                    const isActive = currentPath === node.href ? 'active' : '';
                     headerHTML += `<a href="${node.href}" class="nav-link ${isActive}">${node.text}</a>`;
                 } else if (node.type === 'dropdown') {
-                    const hasActiveChild = node.items.some(sub => currentFilename === sub.href);
+                    const hasActiveChild = node.items.some(sub => currentPath === sub.href);
                     const parentActive = hasActiveChild ? 'active' : '';
 
                     headerHTML += `
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     `;
 
                     node.items.forEach(sub => {
-                        const isSubActive = currentFilename === sub.href ? 'active-sub' : '';
+                        const isSubActive = currentPath === sub.href ? 'active-sub' : '';
                         headerHTML += `<a href="${sub.href}" class="${isSubActive}">${sub.text}</a>`;
                     });
 

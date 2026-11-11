@@ -2,36 +2,36 @@
     {
         "type": "link",
         "text": "Home",
-        "href": "index.html"
+        "href": "/index.html"
     },
     {
         "type": "dropdown",
         "text": "44CCT",
         "items": [
-            { "text": "Videos", "href": "44cct_videos.html" }
+            { "text": "Videos", "href": "/44cct_videos.html" }
         ]
     },
     {
         "type": "dropdown",
         "text": "Travels",
         "items": [
-            { "text": "Peru", "href": "peru.html" },
-            { "text": "New Zealand", "href": "new-zealand.html" },
-            { "text": "Backpacking", "href": "backpacking.html" }
+            { "text": "Peru", "href": "/travels/peru.html" },
+            { "text": "New Zealand", "href": "/travels/new-zealand.html" },
+            { "text": "Backpacking", "href": "/travels/backpacking.html" }
         ]
     },
     {
         "type": "dropdown",
         "text": "Photos",
         "items": [
-            { "text": "Bugs & animals", "href": "bugs.html" },
-            { "text": "Jamie's Cakes", "href": "cakes.html" },
-            { "text": "Knockturn Alley Booknook", "href": "booknook.html" }
+            { "text": "Bugs & animals", "href": "/bugs.html" },
+            { "text": "Jamie's Cakes", "href": "/cakes.html" },
+            { "text": "Knockturn Alley Booknook", "href": "/booknook.html" }
         ]
     },
     {
         "type": "link",
         "text": "About",
-        "href": "about.html"
+        "href": "/about.html"
     }
 ]
