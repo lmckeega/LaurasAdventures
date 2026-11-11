@@ -20,11 +20,15 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(menuData => {
             // Highlight the current page (including links inside dropdowns).
-            
-		const currentPath = window.location.pathname === '/'
-			? '/index.html'
-			: window.location.pathname;
+            // Compare complete paths, so files with the same name in different folders
+            // can still be highlighted correctly.
+            const currentPath = window.location.pathname === '/'
+                ? '/index.html'
+                : window.location.pathname;
 
+            // Use each page's actual path from menu.json. Also accept older
+            // entries without the initial slash, so existing menus keep working.
+            const menuPath = href => '/' + href.replace(/^\/+/, '');
 
             let headerHTML = `
                 <header class="site-header">
@@ -39,10 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             menuData.forEach(node => {
                 if (node.type === 'link') {
-                    const isActive = currentPath === node.href ? 'active' : '';
-                    headerHTML += `<a href="${node.href}" class="nav-link ${isActive}">${node.text}</a>`;
+                    const isActive = currentPath === menuPath(node.href) ? 'active' : '';
+                    headerHTML += `<a href="${menuPath(node.href)}" class="nav-link ${isActive}">${node.text}</a>`;
                 } else if (node.type === 'dropdown') {
-                    const hasActiveChild = node.items.some(sub => currentPath === sub.href);
+                    const hasActiveChild = node.items.some(sub => currentPath === menuPath(sub.href));
                     const parentActive = hasActiveChild ? 'active' : '';
 
                     headerHTML += `
@@ -53,8 +57,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     `;
 
                     node.items.forEach(sub => {
-                        const isSubActive = currentPath === sub.href ? 'active-sub' : '';
-                        headerHTML += `<a href="${sub.href}" class="${isSubActive}">${sub.text}</a>`;
+                        const isSubActive = currentPath === menuPath(sub.href) ? 'active-sub' : '';
+                        headerHTML += `<a href="${menuPath(sub.href)}" class="${isSubActive}">${sub.text}</a>`;
                     });
 
                     headerHTML += `</div></div>`;

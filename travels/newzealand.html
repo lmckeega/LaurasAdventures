@@ -1,26 +1,46 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Tramping New Zealand</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Page - Laura's Adventures</title>
 
-	<link rel="stylesheet" href="/navigation.css">
-	<link rel="stylesheet" href="/content-layouts.css">
-	<link rel="stylesheet" href="/lightbox.css">
+    <!-- Shared styling (root-relative paths work in any site folder) -->
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/content-layouts.css">
+    <link rel="stylesheet" href="/lightbox.css">
 
-	<script src="/navigation.js" defer></script>
-	<script src="/lightbox.js" defer></script>
-
+    <!-- Shared navigation and image viewer -->
+    <script src="/navigation.js" defer></script>
+    <script src="/lightbox.js" defer></script>
 </head>
-
-
 <body class="story-page">
-
-    <!-- Shared website navigation -->
+    <!-- Shared site header. navigation.js fills this from /menu.json. -->
     <div id="global-navigation-hub"></div>
 
-    <h1>Tramping New Zealand</h1>
-	<a href="newzealand/making-knives.html" target="_self">Making Knives</a>
+    <!-- EDIT ONLY THE MAIN SECTION FOR EACH NEW PAGE -->
+    <main id="page-content">
+        <h1>Tramping New Zealand</h1>
+        <p>Replace this paragraph with your page content.</p>
 
+        <!-- Add story text, photographs, layout snippets, and galleries here. -->
+    </main>
+    <!-- END PAGE CONTENT -->
+
+    <!-- Shared lightbox viewer: required only if this page uses a lightbox gallery. -->
+    <div id="myLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <span class="close-btn" role="button" tabindex="0" onclick="closeLightbox()" aria-label="Close photo viewer">&times;</span>
+        <span class="nav-btn prev-btn" role="button" tabindex="0" onclick="changeImage(-1)" aria-label="Previous photo">&#10094;</span>
+        <span class="nav-btn next-btn" role="button" tabindex="0" onclick="changeImage(1)" aria-label="Next photo">&#10095;</span>
+        <img id="lightboxImg" class="lightbox-content" src="" alt="Active photo">
+        <div class="lightbox-caption">
+            <div id="captionTitle" class="caption-title"></div>
+            <div id="captionDesc" class="caption-desc"></div>
+        </div>
+    </div>
+
+    <!-- For a gallery, use setLightboxImages(photos) and openLightbox(index),
+         just as in making-knives.html. Merely including the viewer does not
+         automatically create a gallery. -->
 </body>
 </html>
