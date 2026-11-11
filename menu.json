@@ -16,7 +16,7 @@
         "text": "Travels",
         "items": [
             { "text": "Peru", "href": "/travels/peru.html" },
-            { "text": "New Zealand", "href": "/travels/new-zealand.html" },
+            { "text": "New Zealand", "href": "/travels/newzealand.html" },
             { "text": "Backpacking", "href": "/travels/backpacking.html" }
         ]
     },
