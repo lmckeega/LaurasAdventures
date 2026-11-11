@@ -13,6 +13,28 @@
     <!-- Shared navigation and image viewer -->
     <script src="/navigation.js" defer></script>
     <script src="/lightbox.js" defer></script>
+	<style>
+        /* --- GLOBAL PALETTE & RESET --- */
+        body {
+            background-image: url('/images/grass-bg.jpg');
+            background-size: cover;       /* Ensures it fills the screen perfectly */
+            background-position: center;  /* Centers the grass texture */
+            background-attachment: fixed;  /* Keeps it fixed while scrolling (like Wix) */
+            background-color: #0b0c10;
+            color: #ffffff;
+            margin: 0;
+            padding: 40px 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            color: #e5e5e5;
+        }
+	</style>
 </head>
 <body class="story-page">
     <!-- Shared site header. navigation.js fills this from /menu.json. -->
