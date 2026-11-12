@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<title>Story Name - Laura's Adventures</title>
@@ -11,44 +11,78 @@
 
 	<script src="/navigation.js" defer></script>
 	<script src="/lightbox.js" defer></script>
+	<script src="/story-gallery.js" defer></script>
 
 </head>
 
 
 <body class="story-page">
+	
+	<!-- ======================================================
+     STORY PAGE STARTER — EDITING CHECKLIST
+
+     1. Change the <title> in the HEAD section.
+     2. Change the <h1> page heading.
+     3. Replace the story paragraphs.
+     4. Add photographs in the PHOTO GALLERY section.
+     5. Change each photo's filename, title and caption.
+     6. Adjust object-position if thumbnail cropping
+        cuts off an important part of the photograph.
+
+     DO NOT CHANGE:
+     - storyGallery ID
+     - myLightbox ID
+     - Shared navigation and lightbox JavaScript
+     ====================================================== -->
 
     <!-- Shared website navigation -->
     <div id="global-navigation-hub"></div>
 
-    <h1>Story Name</h1>
+	<main id="page-content">
+		<h1>Story Name</h1>
 
-	//* Page Content Starts *//
-	<p>
-		Add content
-	</p>
+		<!-- Page Content Starts -->
+		<p>
+			Add content
+		</p>
 
-	//* Page Content Starts *//
+		<!-- Page Content Ends -->
 
-	
-	<h2>Photo Gallery</h2>
+		<!-- =====================================================
+		 PHOTO GALLERY — START
+		 Add, remove, or rearrange photographs here.
+		 Change object-position to adjust thumbnail cropping.
+		 ===================================================== -->
 
-	<div class="story-gallery" id="knifeGallery">
+		<h2>Photo Gallery</h2>
 
-		<button type="button">
-			<img src="/images/travels/newzealand/making-knives/knife.jpg"
-				 alt="Knife Progression" loading="lazy">
-		</button>
+		<div class="story-gallery" id="storyGallery">
 
-		<button type="button">
-			<img src="/images/travels/newzealand/making-knives/IMGP0408.JPG"
-				 alt="Cristina" loading="lazy">
-		</button>
+			<!-- PHOTO 1 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/IMG_0706.JPG"
+					 alt="All in a day's work"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
 
-		<button type="button">
-			<img src="/images/travels/newzealand/making-knives/IMGP0419.JPG"
-				 alt="Pounding the hot metal" loading="lazy">
-		</button>
-	</div>
+			<!-- PHOTO 2 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/DSCN3782.JPG"
+					 alt="Cristina in front of her hobbit hole"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+			<!-- ADD MORE PHOTOGRAPHS HERE -->
+
+		</div>
+
+		<!-- PHOTO GALLERY — END -->
+
+	</main>	
 	
 	<div id="myLightbox" class="lightbox"
 		 role="dialog" aria-modal="true"
@@ -72,35 +106,5 @@
 			<div id="captionDesc" class="caption-desc"></div>
 		</div>
 	</div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-
-		const buttons =
-			Array.from(document.querySelectorAll(
-				'#knifeGallery button'
-			));
-
-		const photos = buttons.map(button => {
-			const img = button.querySelector('img');
-
-			return {
-				src: img.getAttribute('src'),
-				title: img.alt,
-				desc: img.dataset.caption || ''
-			};
-		});
-
-		setLightboxImages(photos);
-
-		buttons.forEach((button, index) => {
-			button.addEventListener('click', () => {
-				openLightbox(index);
-			});
-		});
-
-	});
-	</script>
-
 </body>
 </html>

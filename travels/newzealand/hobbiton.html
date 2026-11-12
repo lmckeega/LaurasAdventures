@@ -11,14 +11,34 @@
 
 	<script src="/navigation.js" defer></script>
 	<script src="/lightbox.js" defer></script>
+	<script src="/story-gallery.js" defer></script>
 
 </head>
 
 
 <body class="story-page">
+	
+	<!-- ======================================================
+     STORY PAGE STARTER — EDITING CHECKLIST
+
+     1. Change the <title> in the HEAD section.
+     2. Change the <h1> page heading.
+     3. Replace the story paragraphs.
+     4. Add photographs in the PHOTO GALLERY section.
+     5. Change each photo's filename, title and caption.
+     6. Adjust object-position if thumbnail cropping
+        cuts off an important part of the photograph.
+
+     DO NOT CHANGE:
+     - storyGallery ID
+     - myLightbox ID
+     - Shared navigation and lightbox JavaScript
+     ====================================================== -->
 
     <!-- Shared website navigation -->
     <div id="global-navigation-hub"></div>
+
+	<main id="page-content">
 
     <h1>Hobbiton</h1>
 
@@ -30,43 +50,79 @@
 		Our tour guide was from the US and is in New Zealand on a working visa. We have met quite a few people that are here on working visas. Many of them say they don't want to leave. 
 	</p>
 
-	<!-- Page Content Ends -->
+		<!-- Page Content Ends -->
 
-	
-	<h2>Photo Gallery</h2>
+		<!-- =====================================================
+		 PHOTO GALLERY — START
+		 Add, remove, or rearrange photographs here.
+		 Change object-position to adjust thumbnail cropping.
+		 ===================================================== -->
 
-	<div class="story-gallery" id="hobbitonGallery">
+		<h2>Photo Gallery</h2>
 
-		<button type="button">
-			<img src="/images/travels/newzealand/hobbiton/IMG_0706.JPG"
-				 alt="All in a days work" style="object-position: center 20%;" loading="lazy">
-		</button>
+		<div class="story-gallery" id="storyGallery">
 
-		<button type="button">
-			<img src="/images/travels/newzealand/hobbiton/DSCN3782.JPG"
-				 alt="Cristina in front of her hobbit hole" style="object-position: center center;" loading="lazy">
-		</button>
+			<!-- PHOTO 1 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/IMG_0706.JPG"
+					 alt="All in a day's work"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
 
-		<button type="button">
-			<img src="/images/travels/newzealand/hobbiton/DSCN3794.JPG"
-				 alt="Another hobbit hole" style="object-position: center center;" loading="lazy">
-		</button>
-		
-		<button type="button">
-			<img src="/images/travels/newzealand/hobbiton/DSCN3826.JPG"
-				 alt="Do we look like hobbits?" style="object-position: center center;" loading="lazy">
-		</button>
+			<!-- PHOTO 2 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/DSCN3782.JPG"
+					 alt="Cristina in front of her hobbit hole"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
 
-		<button type="button">
-			<img src="/images/travels/newzealand/hobbiton/DSCN3835.JPG"
-				 alt="Laura's hobbit hole" style="object-position: center center;" loading="lazy">
-		</button>
+			<!-- PHOTO 3 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/DSCN3794.JPG"
+					 alt="Another hobbit hole"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 4 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/DSCN3826.JPG"
+					 alt="Do we look like Hobbits?"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 5 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/DSCN3835.JPG"
+					 alt="Laura's hobbit hole"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 6 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/hobbiton/DSCN3854.JPG"
+					 alt="Cristina the Hobbit"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
 
-		<button type="button">
-			<img src="/images/travels/newzealand/hobbiton/DSCN3854.JPG"
-				 alt="Cristina the Hobbit" style="object-position: center top;" loading="lazy">
-		</button>
-	</div>
+			
+			<!-- ADD MORE PHOTOGRAPHS HERE -->
+		</div>
+
+		<!-- PHOTO GALLERY — END -->
+
+	</main>	
 	
 	<div id="myLightbox" class="lightbox"
 		 role="dialog" aria-modal="true"
@@ -90,35 +146,5 @@
 			<div id="captionDesc" class="caption-desc"></div>
 		</div>
 	</div>
-
-<script>
-	document.addEventListener('DOMContentLoaded', function () {
-
-		const buttons =
-			Array.from(document.querySelectorAll(
-				'#hobbitonGallery button'
-			));
-
-		const photos = buttons.map(button => {
-			const img = button.querySelector('img');
-
-			return {
-				src: img.getAttribute('src'),
-				title: img.alt,
-				desc: img.dataset.caption || ''
-			};
-		});
-
-		setLightboxImages(photos);
-
-		buttons.forEach((button, index) => {
-			button.addEventListener('click', () => {
-				openLightbox(index);
-			});
-		});
-
-	});
-	</script>
-
 </body>
 </html>
