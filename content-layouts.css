@@ -1,128 +1,209 @@
 @charset "utf-8";
-/* CSS Document */
+/* ============================================================================
+   CONTENT LAYOUTS — Laura's Adventures
+   ============================================================================
 
+   PURPOSE
+   Shared styling for travel pages, story/article pages, photographs, columns,
+   and photo galleries. The site-wide menu itself is styled in navigation.css.
+
+   QUICK FIND — THINGS YOU MAY WANT TO ADJUST
+   -------------------------------------------------------------
+   PAGE START BELOW THE FIXED TOP MENU:
+     body.story-page  -> padding: 121px 24px 48px; (desktop)
+     body.story-page  -> padding: 80px 16px 32px;  (phone)
+     body.travel-page -> padding-top: 107px;       (desktop)
+     body.travel-page -> padding-top: 74px;        (phone)
+
+   TRAVEL PAGE TITLE:
+     .travel-header     -> padding INSIDE the title/header box
+     .travel-header h1  -> font-size: clamp(...) controls title size
+
+   PHOTOS AND GALLERIES:
+     .photo-left/.photo-right -> spacing around floated photos
+     .photo-center           -> centered full-width photo
+     .two-column             -> side-by-side content
+     .photo-gallery          -> 2-column grid; 1 on phones
+     .story-gallery          -> 3-column clickable grid; 2 on phones
+
+   IMPORTANT: CSS padding and margin are different.
+     padding = space INSIDE the element (between edge and contents).
+     margin  = space OUTSIDE the element (between it and other things).
+
+   The menu is fixed at the top of the screen. The BODY top padding below is
+   what makes room for it. Changing .travel-header padding moves the title
+   *within its own box*; it does NOT set the page's distance below the menu.
+
+   Screen-width rules (media queries) change some values on smaller screens.
+   ============================================================================ */
+
+
+/* ============================================================================
+   1. WHERE PAGE CONTENT STARTS BELOW THE TOP NAVIGATION
+   ============================================================================ */
+
+/* STORY / ARTICLE PAGES (pages using <body class="story-page">) */
+body.story-page {
+    max-width: 960px;               /* Maximum width of story content on desktop. */
+    margin: 0 auto;                 /* 0 top/bottom margin; auto left/right centers the page. */
+    padding: 121px 24px 48px;       /* TOP 121px: space for fixed menu; SIDES 24px; BOTTOM 48px. */
+    box-sizing: border-box;         /* Include padding in the maximum width above. */
+    line-height: 1.6;               /* Line spacing for story text; 1.6 times font size. */
+}
+
+/* TRAVEL PAGES (pages using <body class="travel-page">) */
+body.travel-page {
+    margin: 0;                      /* Remove browser's default outside body margin. */
+    padding-top: 107px;             /* DESKTOP: where content begins below the fixed menu. */
+}
+
+/* PHONE OVERRIDES for BOTH page types.
+   These apply when the browser window is 600px wide OR NARROWER.
+   A different menu height on mobile is why the top-padding values are lower. */
+@media (max-width: 600px) {
+    body.story-page {
+        padding: 80px 16px 32px;    /* TOP 80px: below menu; SIDES 16px; BOTTOM 32px. */
+    }
+
+    body.travel-page {
+        padding-top: 74px;          /* PHONE: where travel content begins below menu. */
+    }
+}
+
+/* REMINDER ABOUT THE 601–768px RANGE:
+   The shared navigation may switch to its mobile layout at 768px, while the
+   page-start rules above change at 600px. If pages overlap the mobile menu
+   on medium-width screens, check those breakpoints and top-padding values.
+   No styling has been changed here; this comment is only a troubleshooting tip. */
+
+
+/* ============================================================================
+   2. TRAVEL PAGE HEADING / TITLE STRIP
+   ============================================================================ */
+
+.travel-header {
+    background-color: #faf9f7;      /* Background of the travel heading strip. */
+    text-align: center;             /* Center text inside the strip. */
+    padding: 5px 20px;              /* INSIDE strip: 5px TOP/BOTTOM, 20px LEFT/RIGHT. */
+                                   /* More 5px = taller strip; more 20px = inset title edges. */
+}
+
+.travel-header h1 {
+    font-family: 'Josefin Slab', Georgia, serif; /* Title font; fall back if unavailable. */
+    font-size: clamp(34px, 4.2vw, 54px); /* MIN 34px; FLUID 4.2vw (4.2% of window width); MAX 54px. */
+    font-weight: 300;               /* Light title lettering; larger number = heavier. */
+    line-height: 1.1;               /* Height of each title text line relative to font size. */
+    color: #353535;                 /* Title lettering color. */
+    margin: 0;                      /* Remove browser's default h1 outside spacing. */
+}
+
+
+/* ============================================================================
+   3. INDIVIDUAL PHOTOS ALIGNED WITH STORY TEXT
+   ============================================================================ */
+
+/* Float a photo LEFT and let surrounding text wrap along its RIGHT side. */
 .photo-left {
-	float: left;
-	margin-left: 0px;
-	margin-right: 20px;
-	margin-bottom: 10px;
-	border-radius: 20px;
+    float: left;
+    margin-left: 0px;
+    margin-right: 20px;             /* Gap between photo and wrapped text on its right. */
+    margin-bottom: 10px;            /* Gap below photo before following content. */
+    border-radius: 20px;            /* Rounded corners; 0 = square corners. */
 }
+
+/* Float a photo RIGHT and let surrounding text wrap along its LEFT side. */
 .photo-right {
-	float: right;
-	margin-left: 20px;
-	margin-right: 0px;
-	margin-bottom: 10px;
-	border-radius: 20px;
+    float: right;
+    margin-left: 20px;              /* Gap between wrapped text and photo on its left. */
+    margin-right: 0px;
+    margin-bottom: 10px;
+    border-radius: 20px;
 }
-/* Center photograph with no text wrapping */
+
+/* Center a photo on its own line; text does NOT wrap beside it. */
 .photo-center {
     display: block;
     float: none;
-    margin: 20px auto;
-    max-width: 100%;
-    height: auto;
-	width: 100%;
-    clear: both;
-	border-radius: 20px;
+    margin: 20px auto;              /* 20px ABOVE/BELOW; auto LEFT/RIGHT to center. */
+    max-width: 100%;                /* Never exceed its available container width. */
+    height: auto;                   /* Keep the image's natural proportions. */
+    width: 100%;                    /* Fill the available width (up to max-width). */
+    clear: both;                    /* Start below earlier left/right floated elements. */
+    border-radius: 20px;
 }
 
-/* Two-column layout */
+/* Applies to ALL images inside story pages, not just the classes above. */
+body.story-page img {
+    max-width: 100%;                /* Prevent images spilling beyond story width. */
+    height: auto;                   /* Preserve normal proportions unless overridden. */
+}
+
+
+/* ============================================================================
+   4. TWO-COLUMN CONTENT (TEXT, IMAGES, OR MIXED CONTENT)
+   ============================================================================ */
+
 .two-column {
     display: flex;
-    gap: 20px;
+    gap: 20px;                      /* Horizontal space BETWEEN the two columns. */
 }
 
 .two-column > div {
-    flex: 1;
-    min-width: 0;
+    flex: 1;                        /* Give each direct child column equal flexible space. */
+    min-width: 0;                   /* Allow wide contents to shrink with the column. */
 }
 
-/* Keep images within their columns */
 .two-column img {
-    max-width: 100%;
+    max-width: 100%;                /* Do not let images overflow a column. */
     height: auto;
 }
 
-/* Stack columns on smaller screens */
-@media (max-width: 700px) {
-    .two-column {
-        flex-direction: column;
-    }
-}
 
-/* Story pages */
-body.story-page {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 121px 24px 48px;
-    box-sizing: border-box;
-    line-height: 1.6;
-}
+/* ============================================================================
+   5. PHOTO GALLERIES WITH VISIBLE CAPTIONS
+   ============================================================================ */
 
-/* Keep photographs within the page */
-body.story-page img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Smaller margins on phones */
-@media (max-width: 600px) {
-    body.story-page {
-        padding: 80px 16px 32px;
-    }
-}
-
-
-/* Multiple photographs in a row */
+/* Standard photo gallery: 2 columns on wider screens. */
 .photo-gallery {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-    margin: 24px 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 equal-width columns. */
+    gap: 20px;                      /* Space BETWEEN photo tiles (rows and columns). */
+    margin: 24px 0;                 /* 24px ABOVE/BELOW gallery; 0 LEFT/RIGHT. */
 }
 
 .photo-gallery figure {
-    margin: 0;
+    margin: 0;                      /* Remove default figure margin. */
 }
 
 .photo-gallery img {
-    display: block;
-    width: 100%;
-    height: auto;
+    display: block;                /* Avoid the small inline-image baseline gap. */
+    width: 100%;                    /* Fill each grid column. */
+    height: auto;                   /* Show whole photo at natural proportions. */
 }
 
 .photo-gallery figcaption {
-    margin-top: 8px;
+    margin-top: 8px;                /* Space between photo and caption. */
     text-align: center;
-    font-size: 0.9em;
+    font-size: 0.9em;                /* 90% of the inherited font size. */
     font-style: italic;
     color: #666;
 }
 
-/* Stack photographs on phones */
-@media (max-width: 600px) {
-    .photo-gallery {
-        grid-template-columns: 1fr;
-    }
-}
-
-
-/* Photographs with captions */
+/* Standalone photo + caption block (not necessarily part of a grid). */
 .story-photo {
-    max-width: 700px;
-    margin: 24px auto;
+    max-width: 700px;               /* Limit photo/caption block width on wide screens. */
+    margin: 24px auto;              /* 24px ABOVE/BELOW; center horizontally. */
 }
 
 .story-photo img {
     display: block;
     max-width: 100%;
     height: auto;
-    margin: 0 auto;
+    margin: 0 auto;                 /* Center the image inside the block. */
 }
 
 .story-photo figcaption {
-    margin-top: 8px;
+    margin-top: 8px;                /* Space between photo and caption. */
     text-align: center;
     font-size: 0.9em;
     font-style: italic;
@@ -130,52 +211,25 @@ body.story-page img {
 }
 
 
-/* Travel page heading */
+/* ============================================================================
+   6. CLICKABLE STORY GALLERY + SHARED LIGHTBOX APPEARANCE
+   ============================================================================ */
 
-.travel-header {
-    background-color: #faf9f7;
-    text-align: center;
-    padding: 5px 20px;
-}
-
-.travel-header h1 {
-    font-family: 'Josefin Slab', Georgia, serif;
-    font-size: clamp(34px, 4.2vw, 54px);
-    font-weight: 300;
-    line-height: 1.1;
-    color: #353535;
-    margin: 0;
-}
-
-
-body.travel-page {
-    margin: 0;
-    padding-top: 107px;
-}
-
-@media (max-width: 600px) {
-    body.travel-page {
-        padding-top: 74px;
-    }
-}
-
-
-/* Story photo gallery with lightbox */
-
+/* Gallery of clickable, square thumbnail images. */
 .story-gallery {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin: 24px 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns on desktop. */
+    gap: 10px;                      /* Space between clickable thumbnails. */
+    margin: 24px 0;                 /* Space above/below the entire gallery. */
 }
 
 .story-gallery button {
     display: block;
     width: 100%;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1;            /* Square thumbnails: equal width and height. */
     padding: 0;
     border: 0;
-    overflow: hidden;
+    overflow: hidden;              /* Clip image content to the square tile. */
     background: transparent;
     cursor: pointer;
 }
@@ -184,24 +238,43 @@ body.story-page .story-gallery img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;              /* Fill square tile by CROPPING edges if needed. */
+                                   /* 'contain' would show the entire image instead. */
 }
 
+/* Story page overrides for the shared lightbox (lightbox.css). */
 body.story-page .lightbox {
     color: white;
 }
 
 body.story-page .lightbox-content {
-    max-width: 85%;
-    max-height: 70vh;
+    max-width: 85%;                 /* Largest image width: 85% of available container. */
+    max-height: 70vh;               /* Largest image height: 70% of browser window height. */
     width: auto;
     height: auto;
-    object-fit: contain;
+    object-fit: contain;            /* Show ENTIRE enlarged photo, without cropping. */
 }
 
-@media (max-width: 600px) {
-    .story-gallery {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+/* ============================================================================
+   7. RESPONSIVE GALLERIES AND COLUMNS (SMALL SCREENS)
+   ============================================================================ */
+
+/* When window width is 700px or less, stack the general two-column layout. */
+@media (max-width: 700px) {
+    .two-column {
+        flex-direction: column;     /* Change two side-by-side columns into a vertical stack. */
     }
 }
 
+/* When window width is 600px or less, change photo-gallery column counts.
+   Page-start/mobile top spacing is in SECTION 1 above, not hidden down here. */
+@media (max-width: 600px) {
+    .photo-gallery {
+        grid-template-columns: 1fr; /* Standard gallery becomes ONE column on phones. */
+    }
+
+    .story-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* Clickable gallery becomes TWO columns. */
+    }
+}
