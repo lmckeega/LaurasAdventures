@@ -5,182 +5,238 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laura's Adventures - Welcome</title>
     <style>
-        /* --- RESET & STRUCTURE --- */
-        * {
-            box-sizing: border-box;
+        /* ================================================================
+           LAURA'S ADVENTURES — HOME PAGE ONLY
+           ================================================================
+
+           QUICK FIND / MOST LIKELY SETTINGS TO CHANGE
+           -------------------------------------------
+           SECTION 1: WHERE THE SLIDESHOW STARTS BELOW THE MENU
+               --home-menu-height      Desktop / phone menu clearance
+
+           SECTION 3: HOW EACH PHOTOGRAPH FITS THE SCREEN
+               background-size         cover = fill screen, possibly crop
+               background-position     Comes from each entry in home.json
+               transition             How long photos take to fade
+
+           SECTION 5: OPTIONAL FOREGROUND TITLE / BUTTON (not currently used)
+               Font sizes, text spacing and button appearance
+
+           SECTION 6: PHONE SETTINGS
+               Blurred background, full photo in front, smaller text
+
+           IMPORTANT:
+           - The navigation itself is styled in navigation.css.
+           - The slideshow photo list and per-photo position are in home.json.
+           - Slideshow rotation timing is in the JavaScript near the bottom.
+           ================================================================ */
+
+
+        /* ================================================================
+           SECTION 1 — WHERE THE HOME PHOTOGRAPHS START BELOW THE MENU
+           ================================================================
+           THE FIRST PLACE TO LOOK if pictures start too high or too low.
+
+           This menu is fixed at the top of the browser. We reserve space for
+           it so the slideshow is not hidden behind it.
+
+           These are approximate heights. If you change the navigation's
+           actual height in navigation.css, adjust these values to match.
+           The phone value is in SECTION 6 below.
+           ================================================================ */
+        :root {
+            --home-menu-height: 105px; /* DESKTOP: photo area begins 105px below top of browser */
         }
-        
-        body, html {
+
+
+        /* ================================================================
+           SECTION 2 — PAGE RESET / FULL-SCREEN STRUCTURE
+           ================================================================ */
+        * {
+            box-sizing: border-box; /* Includes padding/border in element dimensions */
+        }
+
+        html,
+        body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Prevents scrollbars on the full-screen view */
-            background-color: #000;
+            overflow: hidden;       /* No page scrollbars: this is a single-screen slideshow */
+            background-color: #000; /* Black while photos are loading */
         }
 
-        /* --- FULL SCREEN BACKGROUND SLIDER --- */
+
+        /* ================================================================
+           SECTION 3 — SLIDESHOW POSITION, PHOTO CROP & FADE
+           ================================================================ */
         .slider-container {
-            position: fixed;
-            top: 0;
+            position: fixed; /* Fixed in the browser window (does not scroll) */
+            top: var(--home-menu-height); /* START BELOW MENU: change in SECTION 1 / 6 */
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: 1;
+            height: calc(100dvh - var(--home-menu-height));
+            /* 100dvh = visible browser height; subtract menu clearance above */
+            z-index: 1; /* Behind the navigation (navigation.css uses a higher value) */
         }
 
         .slide {
-            position: absolute;
+            position: absolute; /* All slides occupy the same area, one over another */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: cover;
-            background-position: var(--slide-position, center); /* Position for this photo, taken from home.json.  
-																Defaults to center when no position is specified. */
+
+            background-size: cover; /* Fills area; crops edges if photo has different shape */
+            background-position: var(--slide-position, center);
+            /* PER-PHOTO POSITION comes from home.json, e.g. "50% 30%".
+               "center" = 50% 50%; "center top" = 50% 0%. */
             background-repeat: no-repeat;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out; /* Controls the crossfade speed */
+
+            opacity: 0; /* Hidden until JavaScript adds .active */
+            transition: opacity 1.5s ease-in-out; /* 1.5 seconds = crossfade speed */
         }
 
-        /* The active class triggered by JS to bring an image forward */
         .slide.active {
-            opacity: 1;
+            opacity: 1; /* Show the currently selected photo */
         }
 
-        /* No overlay */
-        .slider-overlay {
-			display: none;
-		}
 
-        /* --- FOREGROUND CONTENT LAYER --- */
+        /* ================================================================
+           SECTION 4 — OPTIONAL DARK OVERLAY (CURRENTLY DISABLED)
+           ================================================================
+           Previously used to darken photos so text was easier to read.
+           You chose brighter, undarkened photos. Keep this disabled.
+
+           Note: The mobile blurred BACKGROUND is darkened separately in
+           SECTION 6. The sharp foreground photo is not darkened there.
+           ================================================================ */
+        .slider-overlay {
+            display: none; /* CHANGE TO block only if you intentionally re-enable overlay */
+            position: fixed;
+            top: var(--home-menu-height); /* Same starting point as photos */
+            height: calc(100dvh - var(--home-menu-height));
+        }
+
+
+        /* ================================================================
+           SECTION 5 — OPTIONAL TITLE, TEXT AND ENTER BUTTON
+           ================================================================
+           The current index.html has NO .content-layer, <h1>, <p>, or
+           .enter-btn elements in its body. These styles are kept here only
+           in case you decide to put text or a button over the slideshow.
+           They are not affecting the slideshow right now.
+           ================================================================ */
         .content-layer {
             position: relative;
-            z-index: 3;
+            z-index: 3; /* Text would appear above the photographs */
             width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Center contents vertically */
+            align-items: center;     /* Center contents horizontally */
             color: #ffffff;
             text-align: center;
-            padding: 20px;
+            padding: 20px;          /* All FOUR sides: inside content area */
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 300;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
+            font-size: 3.5rem; /* Desktop main heading size; phone override below */
+            font-weight: 300;  /* Light weight */
+            letter-spacing: 4px; /* Extra distance between letters */
+            margin-bottom: 10px; /* Space BELOW heading */
             text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.2rem; /* Desktop paragraph size */
             font-weight: 300;
             letter-spacing: 2px;
-            margin-bottom: 40px;
+            margin-bottom: 40px; /* Space BELOW paragraph */
             color: #e5e5e5;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
 
-        /* --- STYLISH NAVIGATION BUTTON --- */
         .enter-btn {
             display: inline-block;
-            padding: 14px 36px;
-            font-size: 1.1rem;
+            padding: 14px 36px; /* 14px TOP/BOTTOM; 36px LEFT/RIGHT inside button */
+            font-size: 1.1rem;  /* Text size inside button */
             letter-spacing: 2px;
             color: #ffffff;
             text-decoration: none;
-            border: 2px solid #ffffff;
-            background: rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            border: 2px solid #ffffff; /* White outline thickness */
+            background: rgba(255, 255, 255, 0.05); /* Very faint white fill */
+            transition: all 0.3s ease; /* Hover animation duration */
             cursor: pointer;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px); /* Softens photo visible behind button */
         }
 
         .enter-btn:hover {
             background-color: #ffffff;
             color: #000000;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* Mobile responsiveness adjustment */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; }
-            p { font-size: 1rem; }
-            .enter-btn { padding: 12px 28px; font-size: 1rem; }
+            transform: translateY(-2px); /* Raises button by 2px on hover */
         }
 
 
-        /* --- MOBILE HOME PAGE SLIDESHOW --- */
+        /* ================================================================
+           SECTION 6 — PHONE / TABLET (SCREENS 768px WIDE OR LESS)
+           ================================================================
+           Desktop uses a cropped photo (cover). On phones, the sharp copy
+           uses contain so visitors see the entire photo, and a second
+           blurred copy fills the remaining space behind it.
+           ================================================================ */
         @media (max-width: 768px) {
-
-            .slide {
-                overflow: hidden;
+            :root {
+                --home-menu-height: 65px; /* MOBILE: photo area begins 65px below top */
             }
 
-            /* Blurred full-screen copy of photo */
+            .slide {
+                overflow: hidden; /* Prevent blurred background spilling outside slide */
+            }
+
+            /* Background: enlarged, blurred and slightly darker duplicate */
             .slide::before {
                 content: "";
                 position: absolute;
-                inset: -30px;
-                background-image: inherit;
-                background-size: cover;
+                inset: -30px; /* Extend 30px beyond EACH edge to hide blur boundaries */
+                background-image: inherit; /* Same image as the main slide */
+                background-size: cover; /* Completely fills the phone slide area */
                 background-position: center;
                 background-repeat: no-repeat;
                 filter: blur(22px) brightness(0.7);
+                /* blur(22px) = blur strength; brightness(0.7) = 70% brightness
+                   on blurred BACKGROUND ONLY, not the sharp foreground photo */
             }
 
-            /* Sharp, complete photo in foreground */
+            /* Foreground: sharp, complete photograph */
             .slide::after {
                 content: "";
                 position: absolute;
-                inset: 0;
+                inset: 0; /* Use the full slide area without adding extra margins */
                 background-image: inherit;
-                background-size: contain;
+                background-size: contain; /* Show ENTIRE photograph, without cropping */
                 background-position: var(--slide-position, center);
+                /* home.json position; usually little visible effect with contain */
                 background-repeat: no-repeat;
             }
+
+            /* Optional text/button sizes, if those elements are added later */
+            h1 {
+                font-size: 2.2rem; /* Smaller phone heading */
+            }
+
+            p {
+                font-size: 1rem; /* Smaller phone paragraph */
+            }
+
+            .enter-btn {
+                padding: 12px 28px; /* 12px TOP/BOTTOM; 28px LEFT/RIGHT */
+                font-size: 1rem; /* Smaller phone button text */
+            }
         }
-
-
-		/* ==========================================================
-		   HOME PAGE — POSITION SLIDESHOW BELOW THE NAVIGATION
-
-		   CHANGE THESE VALUES if you adjust the menu height.
-		   ========================================================== */
-
-		:root {
-			--home-menu-height: 105px; /* Desktop: height reserved for top menu */
-		}
-
-		/* Position the slideshow below the menu */
-		.slider-container {
-			top: var(--home-menu-height); /* Where slideshow starts */
-			height: calc(100dvh - var(--home-menu-height));
-			/* 100dvh = full visible screen height
-			   minus the space used by the menu */
-		}
-
-		/* Keep the slideshow overlay aligned with the photos */
-		.slider-overlay {
-			position: fixed;
-			top: var(--home-menu-height);
-			height: calc(100dvh - var(--home-menu-height));
-		}
-
-		/* MOBILE — smaller menu, less space needed */
-		@media (max-width: 768px) {
-			:root {
-				--home-menu-height: 65px; /* Phone menu height */
-			}
-		}
-
-
     </style>
     <link rel="stylesheet" href="navigation.css">
     <script src="navigation.js" defer></script>
@@ -192,22 +248,22 @@
 
 
 
-    <!-- BACKGROUND IMAGES (Populated dynamically by JavaScript) -->
+    <!-- Slideshow photos are created by the JavaScript below, using home.json. -->
     <div id="slider" class="slider-container"></div>
     <div class="slider-overlay"></div>
 
-    <!-- FOREGROUND TEXT AND BUTTON -->
+    <!-- No foreground title/button on this page at present; slideshow only. -->
 
 
     <script>
-        // Set rotation timer: 5000 milliseconds = 5 seconds per slide
+        // SLIDESHOW SPEED: 5000 milliseconds = show each image for 5 seconds.
         const slideIntervalTime = 5000; 
         
         let slideImages = []; // Starts empty, populated by home.json
         let currentSlideIndex = 0;
         let slides = [];
 
-        // 1. DYNAMIC DATA FETCH LOADER
+        // 1. LOAD PHOTOS & POSITIONS FROM home.json
         fetch('home.json')
             .then(response => {
                 if (!response.ok) throw new Error("JSON slider configuration could not resolve.");
@@ -219,39 +275,33 @@
             })
             .catch(err => console.error("Error loading home page slider:", err));
 
-        // 2. GENERATE SLIDE DIV ELEMENTS DYNAMICALLY
+        // 2. BUILD THE STACK OF SLIDES
         function buildSlider() {
             const sliderContainer = document.getElementById('slider');
 
 
-		slideImages.forEach((photo, index) => {
-			const slideDiv = document.createElement('div');
-			slideDiv.className = 'slide';
+            slideImages.forEach((photo, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'slide';
 
-			if (index === 0) {
-				slideDiv.classList.add('active');
-			}
+                if (index === 0) {
+                    slideDiv.classList.add('active');
+                }
 
-			// Accept either an old filename or a new photo object
-			const imageSrc = typeof photo === 'string'
-				? photo
-				: photo.src;
+                // Backward compatible: allow both "filename.jpg" and { src, position }.
+                const imageSrc = typeof photo === 'string'
+                    ? photo
+                    : photo.src;
 
-			// Default to center unless the JSON specifies otherwise
-			const imagePosition = typeof photo === 'string'
-				? 'center'
-				: (photo.position || 'center');
+                // Use the photo's home.json position; default is centered.
+                const imagePosition = typeof photo === 'string'
+                    ? 'center'
+                    : (photo.position || 'center');
 
-			slideDiv.style.backgroundImage = `url('${imageSrc}')`;
-
-			// Give this photograph its individual position
-			slideDiv.style.setProperty(
-				'--slide-position',
-				imagePosition
-			);
-
-			sliderContainer.appendChild(slideDiv);
-		});
+                slideDiv.style.backgroundImage = `url('${imageSrc}')`;
+                slideDiv.style.setProperty('--slide-position', imagePosition);
+                sliderContainer.appendChild(slideDiv);
+            });
 
 
             // Gather the freshly created elements into our global tracker array
@@ -263,7 +313,7 @@
             }
         }
 
-        // 3. SLIDER ROTATION ENGINE
+        // 3. ROTATE THROUGH THE PHOTOS
         function startSlideShow() {
             setInterval(() => {
                 // Remove active class from current image
