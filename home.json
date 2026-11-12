@@ -5,7 +5,7 @@
     },
     {
         "src": "images/home/showcase2.jpg",
-        "position": "center"
+        "position": "0% 0%"
     },
     {
         "src": "images/home/showcase3.jpg",
@@ -33,11 +33,11 @@
     },
     {
         "src": "images/home/showcase9.jpg",
-        "position": "center"
+        "position": "center bottom"
     },
     {
         "src": "images/home/showcase10.jpg",
-        "position": "40% 50%"
+        "position": "20% 50%"
     },
     {
         "src": "images/home/showcase11.jpg",
@@ -69,11 +69,11 @@
     },
     {
         "src": "images/home/showcase18.jpg",
-        "position": "center top"
+        "position": "50% 0%"
     },
     {
         "src": "images/home/showcase19.jpg",
-        "position": "center"
+        "position": "50% 30%"
     },
     {
         "src": "images/home/showcase20.jpg",
@@ -85,7 +85,7 @@
     },
     {
         "src": "images/home/showcase22.jpg",
-        "position": "50% 20%"
+        "position": "50% 70%"
     },
     {
         "src": "images/home/showcase23.jpg",
@@ -93,7 +93,7 @@
     },
     {
         "src": "images/home/showcase24.jpg",
-        "position": "50% 20%"
+        "position": "50% 50%"
     },
     {
         "src": "images/home/showcase25.jpg",
@@ -117,7 +117,7 @@
     },
     {
         "src": "images/home/showcase30.jpg",
-        "position": "center top"
+        "position": "center"
     },
     {
         "src": "images/home/showcase31.jpg",

@@ -1,0 +1,45 @@
+/*
+==========================================================
+HOME SLIDESHOW — PHOTO POSITION CHEAT SHEET
+==========================================================
+
+Edit the "position" setting for each photo in home.json.
+
+VERTICAL POSITION (TOP TO BOTTOM)
+
+"center top"       Top of photograph (50% 0%)
+"50% 20%"          Strongly favors the top
+"50% 30%"          Moderately favors the top
+"50% 40%"          Slightly above center
+"center"           Centered (50% 50%)
+"50% 60%"          Slightly below center
+"50% 75%"          Favors the bottom
+"center bottom"    Bottom of photograph (50% 100%)
+
+HORIZONTAL POSITION (LEFT TO RIGHT)
+
+"left center"      Left edge (0% 50%)
+"25% 50%"          Favors the left
+"40% 50%"          Slightly left of center
+"center"           Centered (50% 50%)
+"60% 50%"          Slightly right of center
+"75% 50%"          Favors the right
+"right center"     Right edge (100% 50%)
+
+EXAMPLE IN home.json:
+
+{
+    "src": "images/home/showcase12.jpg",
+    "position": "50% 30%"
+}
+
+NOTES:
+- First percentage = horizontal (left/right).
+- Second percentage = vertical (top/bottom).
+- Start with "center" and adjust in 10% increments.
+- Positioning controls which area remains visible when
+  the photograph is cropped to fill the screen.
+- Changes may have no visible effect in a direction
+  where the image isn't being cropped.
+==========================================================
+*/
