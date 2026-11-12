@@ -37,11 +37,11 @@
     },
     {
         "src": "images/home/showcase10.jpg",
-        "position": "center"
+        "position": "40% 50%"
     },
     {
         "src": "images/home/showcase11.jpg",
-        "position": "center"
+        "position": "40% 50%"
     },
     {
         "src": "images/home/showcase12.jpg",
@@ -49,7 +49,7 @@
     },
     {
         "src": "images/home/showcase13.jpg",
-        "position": "center"
+        "position": "50% 20%"
     },
     {
         "src": "images/home/showcase14.jpg",
@@ -61,7 +61,7 @@
     },
     {
         "src": "images/home/showcase16.jpg",
-        "position": "center"
+        "position": "50% 30%"
     },
     {
         "src": "images/home/showcase17.jpg",
@@ -69,7 +69,7 @@
     },
     {
         "src": "images/home/showcase18.jpg",
-        "position": "center"
+        "position": "center top"
     },
     {
         "src": "images/home/showcase19.jpg",
@@ -81,11 +81,11 @@
     },
     {
         "src": "images/home/showcase21.jpg",
-        "position": "center"
+        "position": "center top"
     },
     {
         "src": "images/home/showcase22.jpg",
-        "position": "center"
+        "position": "50% 20%"
     },
     {
         "src": "images/home/showcase23.jpg",
@@ -93,11 +93,11 @@
     },
     {
         "src": "images/home/showcase24.jpg",
-        "position": "center"
+        "position": "50% 20%"
     },
     {
         "src": "images/home/showcase25.jpg",
-        "position": "center"
+        "position": "50% 10%"
     },
     {
         "src": "images/home/showcase26.jpg",
@@ -105,7 +105,7 @@
     },
     {
         "src": "images/home/showcase27.jpg",
-        "position": "center"
+        "position": "center top"
     },
     {
         "src": "images/home/showcase28.jpg",
@@ -117,11 +117,11 @@
     },
     {
         "src": "images/home/showcase30.jpg",
-        "position": "center"
+        "position": "center top"
     },
     {
         "src": "images/home/showcase31.jpg",
-        "position": "center"
+        "position": "center top"
     },
     {
         "src": "images/home/showcase32.jpg",
