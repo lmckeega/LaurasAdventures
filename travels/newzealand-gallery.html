@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Zealand Photo Gallery | Laura's Adventures</title>
+
+    <!-- SHARED WEBSITE FILES: Keep these the same as your other pages. -->
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/lightbox.css">
+    <script src="/navigation.js" defer></script>
+    <script src="/lightbox.js" defer></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           NEW ZEALAND PHOTO GALLERY — QUICK FIND
+
+           PAGE START BELOW MENU:  Section 1, --nz-menu-height
+           HEADER HEIGHT:          Section 2, .gallery-header padding
+           NUMBER OF PHOTOS/ROW:   Section 3, grid-template-columns
+           THUMBNAIL SHAPE:       Section 3, aspect-ratio
+           PHONE LAYOUT:          Section 4, @media queries
+
+           Image filenames and captions are in:
+           /newzealand-gallery-data.json (not in this HTML file).
+           ============================================================ */
+
+        /* --- SECTION 1: SPACE RESERVED FOR THE FIXED SITE MENU --- */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --nz-menu-height: 121px; /* DESKTOP: begin content 121px below browser top */
+            --gallery-max-width: 1120px; /* Maximum width of the photo grid */
+        }
+
+        body {
+            margin: 0;
+            padding-top: var(--nz-menu-height); /* Keeps title below fixed menu */
+            min-height: 100dvh;
+            background-color: #456228; /* Color used if photo background cannot load */
+            background-image: url('/images/newzealand-bg.jpg');
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #252825;
+            font-family: Georgia, 'Times New Roman', serif;
+        }
+
+        /* --- SECTION 2: TITLE AND RETURN LINK --- */
+        .gallery-header {
+            background: #faf9f7;
+            text-align: center;
+            padding: 14px 20px 16px; /* TOP 14; LEFT/RIGHT 20; BOTTOM 16 */
+        }
+
+        .gallery-header h1 {
+            margin: 0;
+            font-family: 'Josefin Slab', Georgia, serif;
+            font-size: clamp(32px, 4.1vw, 54px); /* MIN 32; FLUID 4.1% viewport width; MAX 54 */
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 6px; /* Distance below title */
+            color: #305f4b;
+            font: 600 14px 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        /* --- SECTION 3: PHOTO GALLERY --- */
+        .gallery-panel {
+            max-width: var(--gallery-max-width);
+            width: calc(100% - 40px); /* 20px side space on smaller desktops */
+            margin: 24px auto 54px;    /* TOP 24; CENTER; BOTTOM 54 */
+            padding: 22px;            /* Inside edge of pale gallery panel */
+            background: rgba(251, 250, 245, .97);
+            border-radius: 6px;
+            box-shadow: 0 8px 25px rgba(16, 34, 18, .24);
+        }
+
+        .gallery-intro {
+            margin: 0 0 18px; /* Gap before photographs */
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr)); /* DESKTOP: 4 photos per row */
+            gap: 16px; /* Space between cards vertically and horizontally */
+        }
+
+        .gallery-card { min-width: 0; margin: 0; }
+
+        .gallery-button {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-radius: 5px;
+            overflow: hidden;
+            background: #b9c4b4;
+            cursor: pointer;
+            aspect-ratio: 4 / 3; /* SHAPE: width 4, height 3; crop thumbnail to fill */
+        }
+
+        .gallery-button img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Fill thumbnail even when source photo is portrait */
+            transition: transform .2s ease;
+        }
+
+        .gallery-button:hover img { transform: scale(1.04); }
+        .gallery-button:focus-visible { outline: 3px solid #2f684e; outline-offset: 3px; }
+
+        .gallery-caption {
+            padding: 7px 4px 0; /* TOP 7; SIDES 4; BOTTOM 0 */
+            text-align: center;
+            font-size: 13px; /* Title beneath each thumbnail */
+            color: #383e37;
+        }
+
+        .gallery-status {
+            margin: 24px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #475b48;
+        }
+
+        /* Reset default browser styling on the shared lightbox buttons. */
+        .lightbox .close-btn,
+        .lightbox .nav-btn {
+            background: none;
+            border: 0;
+            font-family: inherit;
+        }
+
+        /* --- SECTION 4: TABLET AND PHONE --- */
+        @media (max-width: 900px) {
+            .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } /* Tablet: 3 per row */
+        }
+
+        @media (max-width: 768px) { /* Matches your shared mobile menu breakpoint */
+            :root { --nz-menu-height: 64px; } /* MOBILE: menu clearance */
+            body { background-attachment: scroll; } /* More reliable on phones */
+            .gallery-panel { width: calc(100% - 24px); padding: 14px; margin-top: 18px; }
+            .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; } /* Phone: 2 per row */
+            .gallery-caption { font-size: 12px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .gallery-button img { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Global menu, populated from /menu.json by navigation.js. -->
+    <div id="global-navigation-hub"></div>
+
+    <main>
+        <header class="gallery-header">
+            <h1>Pictures from New Zealand</h1>
+            <a class="back-link" href="/newzealand.html">← Back to Tramping New Zealand</a>
+        </header>
+
+        <section class="gallery-panel" aria-label="New Zealand photo gallery">
+            <p class="gallery-intro">Select a photograph to enlarge it and read its caption.</p>
+            <div id="gallery-grid" class="gallery-grid"></div>
+            <p id="gallery-status" class="gallery-status" role="status">Loading photographs...</p>
+        </section>
+    </main>
+
+    <!-- SAME LIGHTBOX HTML AS BUGS AND CAKES: shared lightbox.js handles it. -->
+    <div id="myLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button class="close-btn" type="button" onclick="closeLightbox()" aria-label="Close photo viewer">&times;</button>
+        <button class="nav-btn prev-btn" type="button" onclick="changeImage(-1)" aria-label="Previous photo">&#10094;</button>
+        <button class="nav-btn next-btn" type="button" onclick="changeImage(1)" aria-label="Next photo">&#10095;</button>
+        <img id="lightboxImg" class="lightbox-content" src="" alt="Active photo">
+        <div class="lightbox-caption">
+            <div id="captionTitle" class="caption-title"></div>
+            <div id="captionDesc" class="caption-desc"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================================
+           PHOTO LIST: Change /newzealand-gallery-data.json to add,
+           delete, rearrange, or caption photographs. No HTML edits needed.
+           ============================================================ */
+        fetch('/newzealand-gallery-data.json', { cache: 'no-store' })
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.json();
+            })
+            .then(photos => {
+                if (!Array.isArray(photos)) throw new Error('Gallery data must be a JSON array');
+                const grid = document.getElementById('gallery-grid');
+                const status = document.getElementById('gallery-status');
+
+                if (photos.length === 0) {
+                    status.textContent = 'Photographs will be added here soon.';
+                    return;
+                }
+
+                setLightboxImages(photos);
+                photos.forEach((photo, index) => {
+                    const figure = document.createElement('figure');
+                    figure.className = 'gallery-card';
+
+                    const button = document.createElement('button');
+                    button.className = 'gallery-button';
+                    button.type = 'button';
+                    button.setAttribute('aria-label', 'Open ' + (photo.title || ('photo ' + (index + 1))));
+
+                    const img = document.createElement('img');
+                    img.src = photo.src;
+                    img.alt = photo.title || ('New Zealand photo ' + (index + 1));
+                    img.loading = 'lazy';
+                    button.appendChild(img);
+                    button.addEventListener('click', () => openLightbox(index));
+                    figure.appendChild(button);
+
+                    if (photo.title) {
+                        const caption = document.createElement('figcaption');
+                        caption.className = 'gallery-caption';
+                        caption.textContent = photo.title;
+                        figure.appendChild(caption);
+                    }
+                    grid.appendChild(figure);
+                });
+                status.hidden = true;
+            })
+            .catch(error => {
+                console.error('New Zealand gallery data:', error);
+                document.getElementById('gallery-status').textContent =
+                    'The photo gallery could not be loaded. Please try again later.';
+            });
+    </script>
+</body>
+</html>

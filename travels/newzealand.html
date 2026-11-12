@@ -229,48 +229,7 @@
             letter-spacing: .02em;
         }
 
-        /* --- SECTION 6: OPTIONAL GALLERY (SHOWS ONLY WHEN JSON HAS PHOTOS) --- */
-        .nz-gallery-section {
-            width: min(1160px, calc(100% - 40px));
-            margin: 0 auto 65px;
-            padding: 22px;
-            background: rgba(251, 250, 245, .96);
-            border-radius: var(--nz-card-radius);
-            box-shadow: 0 7px 21px rgba(13, 35, 18, .2);
-        }
-
-        .nz-gallery-section[hidden] { display: none; }
-        .gallery-heading { font-size: 33px; margin: 0 0 8px; }
-        .gallery-explainer { margin: 0 0 18px; color: #5b635a; font-size: 14px; }
-
-        .nz-gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr)); /* Four gallery photos per row */
-            gap: 13px;                                      /* Space between gallery photos */
-        }
-
-        .nz-gallery-thumb {
-            border: 0;
-            padding: 0;
-            background: #d8decf;
-            cursor: pointer;
-            overflow: hidden;
-            border-radius: 3px;
-            aspect-ratio: 4 / 3; /* Shape of gallery thumbnails */
-        }
-
-        .nz-gallery-thumb img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform .2s ease;
-        }
-
-        .nz-gallery-thumb:hover img { transform: scale(1.05); }
-        .nz-gallery-thumb:focus-visible { outline: 3px solid #46725a; outline-offset: 3px; }
-
-        /* --- SECTION 7: TABLET AND PHONE ADJUSTMENTS --- */
+        /* --- SECTION 6: TABLET AND PHONE ADJUSTMENTS --- */
         @media (max-width: 900px) {
             .nz-main-grid {
                 grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
@@ -334,6 +293,26 @@
         @media (prefers-reduced-motion: reduce) {
             .story-card, .nz-gallery-thumb img { transition: none; }
         }
+		
+		
+		/* --- NEW ZEALAND PHOTO GALLERY LINK --- */
+
+		.nz-gallery-link {
+			display: inline-block;
+			margin-top: 10px;         /* Space above button */
+			padding: 9px 20px;        /* 9px top/bottom, 20px left/right */
+			background: #335947;     /* Dark green background */
+			color: #ffffff;          /* White lettering */
+			text-decoration: none;   /* Remove underline */
+			border-radius: 5px;      /* Slightly rounded corners */
+			font: 600 14px 'Segoe UI', Tahoma, sans-serif;
+		}
+
+		.nz-gallery-link:hover,
+		.nz-gallery-link:focus-visible {
+			background: #244234;     /* Darker when hovered */
+		}
+
     </style>
 </head>
 <body class="travel-page">
@@ -345,6 +324,7 @@
             <h1>Tramping New Zealand</h1>
             <p class="trip-subtitle">January 5–27, 2016 · North &amp; South Islands</p>
             <a class="jump-to-stories" href="#stories-title">Jump to the stories ↓</a>
+			<a class="nz-gallery-link" href="/newzealand-gallery.html"> View the Photo Gallery</a>
         </header>
 
         <div class="nz-main-grid">
@@ -421,67 +401,6 @@
                 </div>
             </section>
         </div>
-
-        <!-- OPTIONAL GALLERY: Hidden until /newzealand-gallery-data.json has photos. -->
-        <section id="trip-gallery" class="nz-gallery-section" aria-labelledby="gallery-title" hidden>
-            <h2 id="gallery-title" class="gallery-heading">Pictures from New Zealand</h2>
-            <p class="gallery-explainer">Click a photograph to see it larger and read its caption.</p>
-            <div id="trip-gallery-grid" class="nz-gallery-grid"></div>
-        </section>
     </main>
-
-    <!-- The same shared lightbox used by your other galleries. -->
-    <div id="myLightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
-        <span class="close-btn" role="button" tabindex="0" onclick="closeLightbox()" aria-label="Close photo viewer">&times;</span>
-        <span class="nav-btn prev-btn" role="button" tabindex="0" onclick="changeImage(-1)" aria-label="Previous photo">&#10094;</span>
-        <span class="nav-btn next-btn" role="button" tabindex="0" onclick="changeImage(1)" aria-label="Next photo">&#10095;</span>
-        <img id="lightboxImg" class="lightbox-content" src="" alt="Active photo">
-        <div class="lightbox-caption">
-            <div id="captionTitle" class="caption-title"></div>
-            <div id="captionDesc" class="caption-desc"></div>
-        </div>
-    </div>
-
-    <script>
-        /* ==============================================================
-           OPTIONAL TRIP PHOTO GALLERY
-
-           To add photos later, edit /newzealand-gallery-data.json.
-           Each item needs src, title, and desc, just like bugs-data.json.
-           An empty [] file keeps this entire section hidden.
-           =============================================================== */
-        fetch('/newzealand-gallery-data.json', { cache: 'no-store' })
-            .then(response => {
-                if (!response.ok) throw new Error('Gallery data not found');
-                return response.json();
-            })
-            .then(photos => {
-                if (!Array.isArray(photos) || photos.length === 0) return;
-
-                window.setLightboxImages(photos);
-                const grid = document.getElementById('trip-gallery-grid');
-
-                photos.forEach((photo, index) => {
-                    const button = document.createElement('button');
-                    button.type = 'button';
-                    button.className = 'nz-gallery-thumb';
-                    button.setAttribute('aria-label', 'Open photo: ' + (photo.title || `Photo ${index + 1}`));
-
-                    const img = document.createElement('img');
-                    img.src = photo.src;
-                    img.alt = photo.title || `New Zealand photo ${index + 1}`;
-                    img.loading = 'lazy';
-                    button.appendChild(img);
-                    button.addEventListener('click', () => window.openLightbox(index));
-                    grid.appendChild(button);
-                });
-
-                document.getElementById('trip-gallery').hidden = false;
-            })
-            .catch(error => {
-                // No photos yet is fine; the story page still works normally.
-                console.info('New Zealand gallery not loaded:', error.message);
-            });
-    </script>
 </body>
 </html>
