@@ -15,11 +15,10 @@
 }
 
 .lightbox-content {
-    max-width: 95%;       /* Maximum width of photo on screen */
-    max-height: 85%;      /* Maximum height of photo on screen */
-    width: auto;          /* Maintain original photo proportions */
-    height: auto;         /* Maintain original photo proportions */
-    object-fit: contain;  /* Show entire photograph without cropping */
+    height: 75vh;        /* Make photo 75% of screen height */
+    width: auto;         /* Maintain natural photo proportions */
+    max-width: 95vw;     /* Never exceed 95% of screen width */
+    object-fit: contain; /* Show complete photo without cropping */
 
     border: 4px solid #1f2833;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
