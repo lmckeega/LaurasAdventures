@@ -94,8 +94,8 @@
         .itinerary-panel {
             position: sticky; /* Keeps itinerary visible beside the scrolling story list */
             top: calc(var(--nz-menu-height) + 16px); /* Sticks 16px below fixed menu */
-            max-height: calc(100dvh - var(--nz-menu-height) - 32px);
-            /* Tall itineraries scroll INSIDE the panel so the panel stays onscreen. */
+            max-height: calc(100dvh - var(--nz-menu-height) - 150px);
+            /* Tall itineraries scroll INSIDE the panel so the panel stays onscreen.  Was 32, changed to 150 to make it fit on the computer screen */
             overflow-y: auto;
             background: rgba(251, 250, 245, .97);
             border: 1px solid rgba(61, 66, 52, .15);
@@ -387,7 +387,7 @@
                 <h2 id="stories-title" class="stories-heading">Stories from the Trip</h2>
                 <div class="story-list">
                     <a class="story-card" href="https://www.lmckeega.org/single-post/2016-1-24-hobbiton" target="_blank" rel="noopener noreferrer">
-                        <img class="story-image" src="/images/travels/newzealand/hobbiton-preview.jpg" alt="Visitor standing at Hobbiton in New Zealand" loading="lazy">
+                        <img class="story-image" src="/images/travels/newzealand/hobbiton-preview.jpg" alt="Pulling a cart at Hobbiton in New Zealand" loading="lazy">
                         <div class="story-details"><h3>Hobbiton</h3><p>Exploring the Hobbit village, with its tiny homes, smoky chimneys and a visit to the Green Dragon.</p><span class="story-action">Read story on Wix ↗</span></div>
                     </a>
                     <a class="story-card" href="https://www.lmckeega.org/single-post/2016-1-17-kayak-squeeze" target="_blank" rel="noopener noreferrer">
