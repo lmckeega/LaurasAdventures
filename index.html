@@ -37,7 +37,8 @@
             width: 100%;
             height: 100%;
             background-size: cover;
-            background-position: center top; /* Prioritize the top of photos */
+            background-position: var(--slide-position, center); /* Position for this photo, taken from home.json.  
+																Defaults to center when no position is specified. */
             background-repeat: no-repeat;
             opacity: 0;
             transition: opacity 1.5s ease-in-out; /* Controls the crossfade speed */
@@ -141,7 +142,7 @@
                 inset: 0;
                 background-image: inherit;
                 background-size: contain;
-                background-position: center;
+                background-position: var(--slide-position, center);
                 background-repeat: no-repeat;
             }
         }
@@ -222,13 +223,36 @@
         function buildSlider() {
             const sliderContainer = document.getElementById('slider');
 
-            slideImages.forEach((imageSrc, index) => {
-                const slideDiv = document.createElement('div');
-                slideDiv.className = 'slide';
-                if (index === 0) slideDiv.className += ' active'; // First image starts visible
-                slideDiv.style.backgroundImage = `url('${imageSrc}')`;
-                sliderContainer.appendChild(slideDiv);
-            });
+
+		slideImages.forEach((photo, index) => {
+			const slideDiv = document.createElement('div');
+			slideDiv.className = 'slide';
+
+			if (index === 0) {
+				slideDiv.classList.add('active');
+			}
+
+			// Accept either an old filename or a new photo object
+			const imageSrc = typeof photo === 'string'
+				? photo
+				: photo.src;
+
+			// Default to center unless the JSON specifies otherwise
+			const imagePosition = typeof photo === 'string'
+				? 'center'
+				: (photo.position || 'center');
+
+			slideDiv.style.backgroundImage = `url('${imageSrc}')`;
+
+			// Give this photograph its individual position
+			slideDiv.style.setProperty(
+				'--slide-position',
+				imagePosition
+			);
+
+			sliderContainer.appendChild(slideDiv);
+		});
+
 
             // Gather the freshly created elements into our global tracker array
             slides = document.querySelectorAll('.slide');
