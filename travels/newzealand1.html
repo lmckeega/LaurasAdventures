@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRIP NAME - Laura's Adventures</title>
+
+    <!-- Shared website files — these paths work from any folder on your domain. -->
+    <link rel="stylesheet" href="/navigation.css">
+    <link rel="stylesheet" href="/content-layouts.css">
+    <link rel="stylesheet" href="/travel-landing.css">
+    <script src="/navigation.js" defer></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+</head>
+
+<!-- ========================================================================
+     TRAVEL LANDING PAGE — EDITING CHECKLIST
+
+     1. Save a copy as peru.html, germany.html, etc.
+     2. Change the <title> above and the <h1> below.
+     3. Change the BODY background image filename and its filter settings.
+     4. Replace the trip dates and itinerary entries.
+     5. Copy/paste story cards; change their link, image, title, description.
+     6. Set the Photo Gallery link to the right page, when available.
+
+     DO NOT CHANGE: the navigation placeholder or the tl- CSS class names.
+     All page-layout CSS is in /travel-landing.css.
+
+     BACKGROUND FILTERS (change in the BODY line below):
+        --travel-bg-blur: 8px;       0px = sharp; 8px = moderately blurred
+        --travel-bg-brightness: .80; 1 = normal; .80 = 80% brightness
+        --travel-bg-saturation: .75; 1 = normal; .75 = softer colors
+
+     The background is ONLY blurred, not the page text or story cards.
+     ======================================================================== -->
+
+<body class="travel-page travel-landing"
+      style="--travel-bg-image: url('/images/YOUR-TRIP-BACKGROUND.jpg');
+             --travel-bg-blur: 8px;
+             --travel-bg-brightness: .80;
+             --travel-bg-saturation: .75;">
+
+    <!-- Shared top navigation, created automatically from menu.json. -->
+    <div id="global-navigation-hub"></div>
+
+    <main id="page-content">
+        <!-- ================================================================
+             TRIP TITLE / DATES — EDIT THESE FOR EACH DESTINATION
+             ================================================================ -->
+        <header class="travel-header">
+            <h1>TRIP NAME</h1>
+            <p class="tl-trip-subtitle">TRAVEL DATES · LOCATION</p>
+            <a class="tl-jump-link" href="#stories-title">Jump to the stories ↓</a>
+        </header>
+
+        <div class="tl-layout">
+            <!-- ============================================================
+                 ITINERARY — copy/paste <li> rows for each trip day.
+                 On computers, it stays visible with its own scrollbar.
+                 ============================================================ -->
+            <aside class="tl-itinerary" aria-labelledby="itinerary-title">
+                <h2 id="itinerary-title">TRIP NAME Itinerary</h2>
+                <p class="tl-itinerary-intro">A brief introduction to the trip.</p>
+
+                <ol class="tl-trip-dates">
+                    <!-- DATE 1: change datetime, displayed date, and event -->
+                    <li>
+                        <time class="tl-trip-date" datetime="2026-01-01">Jan 1</time>
+                        <span>Arrive and explore.</span>
+                    </li>
+
+                    <!-- DATE 2 -->
+                    <li>
+                        <time class="tl-trip-date" datetime="2026-01-02">Jan 2</time>
+                        <span>Another day of adventures.</span>
+                    </li>
+
+                    <!-- ADD MORE ITINERARY ENTRIES HERE -->
+                </ol>
+            </aside>
+
+            <!-- ============================================================
+                 STORY LINKS — COPY AN ENTIRE <a class="tl-story-card"> BLOCK.
+                 The whole card is clickable. No JSON or JavaScript needed.
+                 Use Dreamweaver to browse to a thumbnail in the <img src>.
+                 ============================================================ -->
+            <section class="tl-stories" aria-labelledby="stories-title">
+
+                <div class="tl-stories-heading">
+                    <h2 id="stories-title">Stories from the Trip</h2>
+                    <!-- CHANGE THE LINK to this trip's separate gallery page.
+                         If there is no gallery yet, remove this <a> temporarily. -->
+                    <a class="tl-gallery-link" href="/travels/TRIP-FOLDER/gallery.html">
+                        Photo Gallery &rarr;
+                    </a>
+                </div>
+
+                <div class="tl-story-list">
+
+                    <!-- STORY 1: Temporary icon until you choose its photo -->
+                    <a class="tl-story-card" href="/travels/TRIP-FOLDER/first-story.html">
+                        <div class="tl-story-media">
+                            <div class="tl-story-placeholder" aria-hidden="true">📷</div>
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>FIRST STORY TITLE</h3>
+                            <p>A short description of the story, usually one or two sentences.</p>
+                            <span class="tl-read-link">Read story &rarr;</span>
+                        </div>
+                    </a>
+
+                    <!-- =====================================================
+                         STORY PHOTO TEMPLATE
+                         Once you have a thumbnail image, REPLACE:
+
+                         <div class="tl-story-placeholder" aria-hidden="true">📷</div>
+
+                         WITH:
+
+                         <img class="tl-story-image"
+                              src="/images/travels/TRIP-FOLDER/story-photo.jpg"
+                              alt="Describe the photo"
+                              style="object-position: center center;"
+                              loading="lazy">
+
+                         Choose the src file in Dreamweaver as usual.
+                         Change object-position to "center top" or "50% 30%"
+                         if important parts of the photo are cropped.
+                         ===================================================== -->
+
+                    <!-- ADD MORE STORY CARDS HERE -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- This is a landing page, not the photo gallery itself. No lightbox
+         or gallery JavaScript is needed here; the link above opens a
+         separate gallery page. -->
+</body>
+</html>

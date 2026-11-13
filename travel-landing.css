@@ -1,0 +1,322 @@
+/* ============================================================================
+   TRAVEL LANDING PAGES — Laura's Adventures
+   Used by: travel-page-starter.html and future trip landing pages.
+
+   QUICK FIND — SETTINGS MOST LIKELY TO CHANGE
+   1. Navigation clearance          --tl-menu-height
+   2. Background photo/effects      on the <body> of EACH HTML page
+   3. Itinerary width vs. stories   .tl-layout grid-template-columns
+   4. Itinerary scrollbar height    .tl-itinerary max-height
+   5. Story thumbnail width         .tl-story-card grid-template-columns
+   6. Green stories header          .tl-stories-heading background
+
+   All rules are scoped to .travel-landing or .tl- so other site pages
+   are not changed. Keep navigation.css and content-layouts.css as they are.
+   ============================================================================ */
+
+/* ============================================================================
+   1. PAGE POSITION BELOW THE FIXED MENU AND BACKGROUND PHOTO
+   ============================================================================ */
+
+body.travel-page.travel-landing {
+    /* DESKTOP: distance between browser top and the page title strip. */
+    --tl-menu-height: 112px;
+
+    /* Spacing and panel details common to all travel landing pages. */
+    --tl-column-gap: 25px;
+    --tl-panel-radius: 5px;
+    --tl-stories-color: rgba(23, 46, 31, 0.85);
+
+    /* A different background image and filter can be supplied on each
+       page's BODY tag, WITHOUT editing this shared CSS file. */
+    --travel-bg-image: none;
+    --travel-bg-blur: 0px;
+    --travel-bg-brightness: 1;
+    --travel-bg-saturation: 1;
+
+    margin: 0;
+    padding: var(--tl-menu-height) 0 0;
+    min-height: 100vh;
+    position: relative;
+    isolation: isolate;
+    background-color: #52634e; /* Fallback color behind the photo */
+    color: #293029;
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.45;
+}
+
+/* Separate photo layer: blurring it will NOT blur the text or cards. */
+body.travel-page.travel-landing::before {
+    content: '';
+    position: fixed;
+    inset: -25px; /* Extra area prevents blurry edges showing at window sides */
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--travel-bg-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    filter: blur(var(--travel-bg-blur))
+            brightness(var(--travel-bg-brightness))
+            saturate(var(--travel-bg-saturation));
+}
+
+body.travel-page.travel-landing *,
+body.travel-page.travel-landing *::before,
+body.travel-page.travel-landing *::after {
+    box-sizing: border-box;
+}
+
+/* ============================================================================
+   2. TRIP TITLE BAND — name, dates, and subtitle
+   ============================================================================ */
+
+.travel-landing .travel-header {
+    background: #faf9f7;
+    text-align: center;
+    padding: 10px 20px 12px; /* TOP; LEFT/RIGHT; BOTTOM */
+    border-bottom: 1px solid rgba(30, 45, 35, 0.12);
+}
+
+.travel-landing .travel-header h1 {
+    font-family: 'Josefin Slab', Georgia, serif;
+    font-size: clamp(36px, 4.4vw, 58px); /* MIN; responsive; MAX */
+    font-weight: 400;
+    line-height: 1.12;
+    margin: 0;
+    color: #343434;
+}
+
+.tl-trip-subtitle {
+    margin: 3px 0 0;
+    color: #62625d;
+    font: 13px 'Segoe UI', Tahoma, sans-serif;
+    letter-spacing: 0.075em;
+}
+
+.tl-jump-link { display: none; } /* Only appears on phones */
+
+/* ============================================================================
+   3. TWO-COLUMN PAGE — itinerary LEFT, stories RIGHT
+   ============================================================================ */
+
+.tl-layout {
+    display: grid;
+    /* LEFT ~44%, RIGHT ~56%. Change .88fr and 1.12fr to adjust widths. */
+    grid-template-columns: minmax(290px, 0.88fr) minmax(0, 1.12fr);
+    gap: var(--tl-column-gap); /* Horizontal space between the columns */
+    align-items: start;
+    width: min(1160px, calc(100% - 40px)); /* Max width; 20px side margins */
+    margin: 26px auto 52px; /* TOP; centered; BOTTOM */
+}
+
+/* ============================================================================
+   4. ITINERARY — sticky box with its OWN scrollbar on desktop
+   ============================================================================ */
+
+.tl-itinerary {
+    position: sticky;
+    top: calc(var(--tl-menu-height) + 16px); /* Keep below fixed navigation */
+    max-height: calc(100dvh - var(--tl-menu-height) - 32px);
+    overflow-y: auto; /* Scroll INSIDE the itinerary, not over the story cards */
+    overscroll-behavior: contain;
+    background: rgba(251, 250, 245, 0.97);
+    border: 1px solid rgba(61, 66, 52, 0.15);
+    border-radius: var(--tl-panel-radius);
+    box-shadow: 0 8px 25px rgba(16, 34, 18, 0.24);
+    padding: 24px 24px 22px;
+}
+
+.tl-itinerary h2 {
+    font: 500 clamp(25px, 2.5vw, 33px) 'Josefin Slab', Georgia, serif;
+    text-align: center;
+    margin: 0 0 9px;
+    color: #39463b;
+}
+
+.tl-itinerary-intro {
+    margin: 0 0 18px;
+    color: #696d61;
+    text-align: center;
+    font: 13px/1.5 'Segoe UI', Tahoma, sans-serif;
+}
+
+.tl-trip-dates { list-style: none; padding: 0; margin: 0; }
+
+.tl-trip-dates li {
+    display: grid;
+    grid-template-columns: 62px minmax(0, 1fr); /* Date; event description */
+    gap: 12px;
+    border-top: 1px solid #e5e6dc;
+    padding: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.tl-trip-date {
+    color: #49634d;
+    font: bold 12px 'Segoe UI', Tahoma, sans-serif;
+    white-space: nowrap;
+    padding-top: 2px;
+}
+
+/* ============================================================================
+   5. STORY LIST — green heading plus photo gallery link
+   ============================================================================ */
+
+.tl-stories { min-width: 0; }
+
+.tl-stories-heading {
+    display: flex;
+    justify-content: space-between; /* Heading left; gallery button right */
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 13px;
+    padding: 13px 16px;
+    background: var(--tl-stories-color); /* Default dark translucent green */
+    border-radius: var(--tl-panel-radius);
+}
+
+.tl-stories-heading h2 {
+    margin: 0;
+    color: #fff;
+    font: 500 clamp(25px, 2.7vw, 31px) 'Josefin Slab', Georgia, serif;
+    line-height: 1.2;
+}
+
+.tl-gallery-link {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #fff;
+    color: #335947;
+    text-decoration: none;
+    border-radius: 4px;
+    white-space: nowrap;
+    font: 600 13px 'Segoe UI', Tahoma, sans-serif;
+}
+
+.tl-gallery-link:hover, .tl-gallery-link:focus-visible {
+    background: #e9eee8;
+    outline: 2px solid #284838;
+    outline-offset: 1px;
+}
+
+.tl-story-list { display: grid; gap: 17px; } /* Vertical space between cards */
+
+.tl-story-card {
+    display: grid;
+    grid-template-columns: 205px minmax(0, 1fr); /* LEFT thumbnail; RIGHT text */
+    min-height: 165px;
+    overflow: hidden;
+    color: #30332f;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.97);
+    border-radius: var(--tl-panel-radius);
+    box-shadow: 0 5px 15px rgba(13, 35, 18, 0.19);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.tl-story-card:hover, .tl-story-card:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 23px rgba(13, 35, 18, 0.29);
+    outline: 2px solid #8ba980;
+    outline-offset: 2px;
+}
+
+/* Media holder allows photos to fill the thumbnail WITHOUT changing card size. */
+.tl-story-media { position: relative; min-height: 165px; background: #879787; }
+
+.tl-story-image {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* Override per photo in HTML as needed */
+}
+
+/* Use this while a story does not yet have a thumbnail photograph. */
+.tl-story-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 165px;
+    height: 100%;
+    color: #fff;
+    background: linear-gradient(145deg, #8e9e86, #405e56);
+    font-size: 38px;
+}
+
+.tl-story-details { padding: 17px 20px; }
+
+.tl-story-details h3 {
+    font: 500 clamp(23px, 2.5vw, 29px)/1.12 'Josefin Slab', Georgia, serif;
+    margin: 0 0 9px;
+}
+
+.tl-story-details p { margin: 0 0 10px; font-size: 14px; line-height: 1.45; }
+
+.tl-read-link {
+    font: 600 12px 'Segoe UI', Tahoma, sans-serif;
+    color: #2e6150;
+}
+
+/* ============================================================================
+   6. TABLET AND PHONE LAYOUT
+   ============================================================================ */
+
+@media (max-width: 900px) {
+    .tl-layout { gap: 17px; }
+    .tl-story-card { grid-template-columns: 150px minmax(0, 1fr); }
+    .tl-story-details { padding: 15px; }
+}
+
+@media (max-width: 768px) {
+    body.travel-page.travel-landing {
+        --tl-menu-height: 65px; /* PHONE: clearance for the smaller nav */
+    }
+
+    .travel-landing .travel-header { padding: 15px 12px 13px; }
+    .travel-landing .travel-header h1 { font-size: clamp(31px, 8vw, 48px); }
+
+    .tl-jump-link {
+        display: inline-block;
+        margin-top: 7px;
+        color: #2d6452;
+        font: 600 12px 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .tl-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 23px;
+        width: min(580px, calc(100% - 24px));
+        margin: 20px auto 35px;
+    }
+
+    .tl-itinerary {
+        position: static; /* No sticky scrolling inside the panel on phones */
+        max-height: none;
+        overflow: visible;
+        width: 100%;
+        padding: 22px 20px;
+    }
+
+    .tl-stories { width: 100%; }
+    .tl-story-card { grid-template-columns: 38% minmax(0, 1fr); }
+    .tl-story-details h3 { font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+    .tl-story-card { grid-template-columns: 37% minmax(0, 1fr); min-height: 140px; }
+    .tl-story-media, .tl-story-placeholder { min-height: 140px; }
+    .tl-story-details { padding: 13px; }
+    .tl-story-details h3 { font-size: 23px; }
+    .tl-story-details p { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tl-story-card { transition: none; }
+}
