@@ -38,18 +38,36 @@
             --nz-card-radius: 5px;    /* Rounded corners for panels and cards */
         }
 
-        body.travel-page {
-            margin: 0;
-            padding: var(--nz-menu-height) 0 0; /* TOP is menu clearance; no side/bottom padding */
-            background-color: #426023;          /* Fallback while background image loads */
-            background-image: url('/images/peru-bg.jpg');
-            background-size: cover;              /* Fill browser; some background cropping is fine */
-            background-position: center;
-            background-attachment: fixed;       /* Keep blurred green image still as page scrolls */
-            color: #262824;
-            font-family: Georgia, 'Times New Roman', serif;
-            line-height: 1.45;
-        }
+		/* =====================================================
+		   PERU PAGE — BACKGROUND PHOTOGRAPH
+		   Change these settings to adjust background appearance.
+		   ===================================================== */
+
+		body.travel-page {
+			background-image: none;
+			background-color: #333333; /* Fallback background */
+			isolation: isolate;
+		}
+
+		/* Background layer — does not affect page content */
+		body.travel-page::before {
+			content: "";
+			position: fixed;
+			inset: -20px;       /* Extends image to hide blurred edges */
+			z-index: -1;
+			pointer-events: none;
+
+			background-image: url('/images/peru-bg.jpg');
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+
+			/* CHANGE THESE TO ADJUST THE BACKGROUND */
+			filter:
+				blur(8px)          /* Higher number = softer image */
+				brightness(0.80)   /* 1.0 = normal; 0.80 = 80% */
+				saturate(0.75);    /* 1.0 = normal; 0.75 = 75% color */
+		}
 
         /* --- SECTION 2: FULL-WIDTH PAGE TITLE BELOW NAVIGATION --- */
         .travel-header {
@@ -257,15 +275,15 @@
 
 		/* Photo Gallery button */
 		.nz-stories-heading .nz-gallery-link {
-    margin: 0;
-    padding: 8px 14px;
-    background: #ffffff;
-    color: #AB0A50;
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 600;
-    white-space: nowrap;
+			margin: 0;
+			padding: 8px 14px;
+			background: #ffffff;
+			color: #335947;
+			border-radius: 4px;
+			text-decoration: none;
+			font-size: 13px;
+			font-weight: 600;
+			white-space: nowrap;
 		}
 
 		.nz-stories-heading .nz-gallery-link:hover {
