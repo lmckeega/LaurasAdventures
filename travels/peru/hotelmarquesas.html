@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Hotel Marquesas - Laura's Adventures</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="/navigation.css">
+	<link rel="stylesheet" href="/content-layouts.css">
+	<link rel="stylesheet" href="/lightbox.css">
+
+	<script src="/navigation.js" defer></script>
+	<script src="/lightbox.js" defer></script>
+	<script src="/story-gallery.js" defer></script>
+
+</head>
+
+
+<body class="story-page">
+	
+	<!-- ======================================================
+     STORY PAGE STARTER — EDITING CHECKLIST
+
+     1. Change the <title> in the HEAD section.
+     2. Change the <h1> page heading.
+     3. Replace the story paragraphs.
+     4. Add photographs in the PHOTO GALLERY section.
+     5. Change each photo's filename, title and caption.
+     6. Adjust object-position if thumbnail cropping
+        cuts off an important part of the photograph.
+
+     DO NOT CHANGE:
+     - storyGallery ID
+     - myLightbox ID
+     - Shared navigation and lightbox JavaScript
+     ====================================================== -->
+
+    <!-- Shared website navigation -->
+    <div id="global-navigation-hub"></div>
+
+	<main id="page-content">
+		<h1>Hotel Marquesas</h1>
+
+		<!-- Page Content Starts -->
+		<p>
+		This is where we are staying for our first 3 nights in Cusco. It is a beautiful and historic hotel. The people are very nice. They have a free breakfast buffet every morning. 
+		</p>
+
+		<p>
+		When we first arrived, they brought us a cup of coca tea and gave us some recommendations for adjusting to the altitude. They were, have a cup of tea, sleep for a little while and take the first day easy. We did just that! 
+		</p>
+
+		<!-- Page Content Ends -->
+
+		<!-- Clear floating photos so the gallery starts below them -->
+		<div style="clear: both;"></div>
+		
+		<!-- =====================================================
+		 PHOTO GALLERY — START
+		 Add, remove, or rearrange photographs here.
+		 Change object-position to adjust thumbnail cropping.
+		 ===================================================== -->
+
+		<h2>Photo Gallery</h2>
+
+		<div class="story-gallery" id="storyGallery">
+
+			<!-- PHOTO 1 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/hotel1.jpg"
+					 alt="Our room is on the upper floor to the right"
+					 data-caption="Climbing the stairs was very hard at first because Cusco is at 11,000 feet."
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+			<!-- PHOTO 2 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/hotel4.jpg"
+					 alt="This hotel was so beautiful"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 3 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/DSCN0326.JPG"
+					 alt="Having tea in the courtyard"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 4 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/tea.jpg"
+					 alt="Coca tea"
+					 data-caption="Meant to help with the altitude. It smells like hay."
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 5 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/keys_edited.jpg"
+					 alt="Our keys"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 6 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/hotel2.jpg"
+					 alt="Another courtyard"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 7 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/DSCN0327_edited.JPG"
+					 alt=""
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+			
+			<!-- PHOTO 8 -->
+			<button type="button">
+				<img src="/images/travels/peru/hotelmarquesas/IMG_2885.JPG"
+					 alt=""
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+
+
+		  <!-- ADD MORE PHOTOGRAPHS HERE -->
+
+		</div>
+
+		<!-- PHOTO GALLERY — END -->
+
+	</main>	
+	
+	<!-- =====================================================
+     SHARED LIGHTBOX — DO NOT MODIFY
+
+     This viewer works with:
+       lightbox.css
+       lightbox.js
+       story-gallery.js
+
+     All story pages use the same lightbox HTML.
+     The photo information comes from storyGallery above.
+     ===================================================== -->
+	
+	<div id="myLightbox" class="lightbox"
+		 role="dialog" aria-modal="true"
+		 aria-label="Photo viewer">
+
+		<span class="close-btn"
+			  onclick="closeLightbox()">&times;</span>
+
+		<span class="nav-btn prev-btn"
+			  onclick="changeImage(-1)">&#10094;</span>
+
+		<span class="nav-btn next-btn"
+			  onclick="changeImage(1)">&#10095;</span>
+
+		<img id="lightboxImg"
+			 class="lightbox-content"
+			 src="" alt="Active photo">
+
+		<div class="lightbox-caption">
+			<div id="captionTitle" class="caption-title"></div>
+			<div id="captionDesc" class="caption-desc"></div>
+		</div>
+	</div>
+</body>
+</html>
