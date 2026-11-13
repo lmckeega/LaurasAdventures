@@ -20,7 +20,7 @@
 
 body.travel-page.travel-landing {
     /* DESKTOP: distance between browser top and the page title strip. */
-    --tl-menu-height: 112px;
+    --tl-menu-height: 100px;
 
     /* Spacing and panel details common to all travel landing pages. */
     --tl-column-gap: 25px;
@@ -74,7 +74,7 @@ body.travel-page.travel-landing *::after {
 .travel-landing .travel-header {
     background: #faf9f7;
     text-align: center;
-    padding: 10px 20px 12px; /* TOP; LEFT/RIGHT; BOTTOM */
+    padding: 20px 20px 18px; /* TOP; LEFT/RIGHT; BOTTOM */
     border-bottom: 1px solid rgba(30, 45, 35, 0.12);
 }
 
