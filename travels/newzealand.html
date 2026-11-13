@@ -236,34 +236,53 @@
 
 		.nz-stories-heading {
 			display: flex;
-			justify-content: space-between; /* Title left, link right */
-			align-items: center;            /* Vertically center both */
-			gap: 15px;                      /* Space between title and link */
+			justify-content: space-between; /* Title left, button right */
+			align-items: center;            /* Vertically center contents */
+			gap: 15px;
+
+			background: rgba(31, 58, 32, 0.85); /* Dark translucent green */
+			padding: 14px 16px;                 /* Inside spacing */
+			border-radius: 5px;                /* Rounded corners */
+			margin-bottom: 12px;               /* Space before first story */
 		}
 
-		/* Gallery link inside green header */
+		/* Stories from the Trip title */
+		.nz-stories-heading h2 {
+			margin: 0;
+			color: #ffffff;       /* White lettering */
+			font-family: 'Josefin Slab', Georgia, serif;
+			font-size: 28px;
+			font-weight: 400;
+		}
+
+		/* Photo Gallery button */
 		.nz-stories-heading .nz-gallery-link {
-			margin: 0;                      /* Remove previous top spacing */
-			padding: 8px 14px;              /* Button size */
-			background: #ffffff;            /* White button */
-			color: #335947;                 /* Dark green text */
+			margin: 0;
+			padding: 8px 14px;
+			background: #ffffff;
+			color: #335947;
 			border-radius: 4px;
 			text-decoration: none;
 			font-size: 13px;
 			font-weight: 600;
-			white-space: nowrap;            /* Keep label on one line */
+			white-space: nowrap;
 		}
 
 		.nz-stories-heading .nz-gallery-link:hover {
 			background: #e9eee8;
 		}
 
-		/* Phones — allow title and link to wrap */
+		/* Phone layout */
 		@media (max-width: 600px) {
 			.nz-stories-heading {
 				flex-wrap: wrap;
 			}
+
+			.nz-stories-heading h2 {
+				font-size: 24px;
+			}
 		}
+
 
 		
         /* --- SECTION 6: TABLET AND PHONE ADJUSTMENTS --- */
@@ -409,15 +428,15 @@
 				</div>
                 <div class="story-list">
                     <a class="story-card" href="intro.html" >
-                        <img class="story-image" src="/images/travels/newzealand/waitomo-day2-preview.jpg" alt="Person suspended above a cave floor during a Waitomo adventure" loading="lazy">
+                        <img class="story-image" src="/images/travels/newzealand/intro-preview.jpg" alt="" loading="lazy">
                         <div class="story-details"><h3>Tramping Through New Zealand</h3><p>Getting ready for three weeks of exploring New Zealand, where hiking is called tramping.</p><span class="story-action">Read story →</span></div>
 					</a>
                     <a class="story-card" href="/travels/newzealand/day-one.html" >
-                        <img class="story-image" src="/images/travels/newzealand/waitomo-day2-preview.jpg" alt="Person suspended above a cave floor during a Waitomo adventure" loading="lazy">
+                        <img class="story-image" src="/images/travels/newzealand/day1-preview.jpg" alt="" loading="lazy">
                         <div class="story-details"><h3>Day One, Auckland</h3><p>Arriving in Auckland after the long flight and beginning the journey through New Zealand.</p><span class="story-action">Read story →</span></div>
                     </a>
                     <a class="story-card" href="/travels/newzealand/driving.html" >
-                        <img class="story-image" src="/images/travels/newzealand/waitomo-day2-preview.jpg" alt="Person suspended above a cave floor during a Waitomo adventure" loading="lazy">
+                        <img class="story-image" src="/images/travels/newzealand/driving-preview.jpg" alt="" loading="lazy">
                         <div class="story-details"><h3>Driving on the Wrong Side of the Road</h3><p>Adjusting to a rental car and to driving on the opposite side of the road.</p><span class="story-action">Read story →</span></div>
                     </a>
 					<a class="story-card" href="/travels/newzealand/tubing.html" >
