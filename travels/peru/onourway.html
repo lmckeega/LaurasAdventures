@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>On Our Way - Laura's Adventures</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="/navigation.css">
+	<link rel="stylesheet" href="/content-layouts.css">
+	<link rel="stylesheet" href="/lightbox.css">
+
+	<script src="/navigation.js" defer></script>
+	<script src="/lightbox.js" defer></script>
+	<script src="/story-gallery.js" defer></script>
+
+</head>
+
+
+<body class="story-page">
+	
+	<!-- ======================================================
+     STORY PAGE STARTER — EDITING CHECKLIST
+
+     1. Change the <title> in the HEAD section.
+     2. Change the <h1> page heading.
+     3. Replace the story paragraphs.
+     4. Add photographs in the PHOTO GALLERY section.
+     5. Change each photo's filename, title and caption.
+     6. Adjust object-position if thumbnail cropping
+        cuts off an important part of the photograph.
+
+     DO NOT CHANGE:
+     - storyGallery ID
+     - myLightbox ID
+     - Shared navigation and lightbox JavaScript
+     ====================================================== -->
+
+    <!-- Shared website navigation -->
+    <div id="global-navigation-hub"></div>
+
+	<main id="page-content">
+		<h1>On Our Way</h1>
+
+		<!-- Page Content Starts -->
+		<p>
+		Well,  we are on our way!  This morning,  Cristina and I were supposed to meet on the third car of the 6:32 Bart train. Cristina got on the Bart train in Concord,  one stop before mine.  So,  it turns out that the first train of the day was late,  so I thought it was the correct one and got on.  But,  Cristina wasn't there.  I called her and we figured out that she was on the next train.  I got off in Lafayette and waited for the next train.  There she was!  Now we were really in our way! 
+		</p>
+
+		<p> 
+		At the airport,  we waited in the ticketing line with our baggage.  When we got to the agent,  she said that the flight had been rescheduled and was leaving an hour earlier.  She called to get someone to expedite our baggage to the plane and gave us our boarding passes.  We now had 30 minutes to get through security and to the gate. We did the proverbial run through the airport and actually got to the gate in plenty of time. Everyone was very nice during this process.  The ticket agent for American Airlines and the TSAs at security. We had 'TSA Pre' on our boarding passes so didn't have to take off shoes,  or take stuff out of our bags.  
+		</p>
+
+		<p> 
+		The flight to LAX was uneventful and we had about 3 hours to kill waiting for our next flight.   
+		</p>
+
+		<p> 
+		The flight from LAX to Lima was about 8.5 hours.  We flew in LAN in a 767. It was very nice.  They gave free headphones and had screens in every seatback. There were a bunch of movies and tv shows to pick from.  I chose Monuments Men and Due Date, as well as a few tv shows.  Before I knew it,  we were landing.  
+		</p>
+		<img src="../../images/travels/peru/onourway/gary 2.JPG" class="photo-right" width="400"  alt=""/>
+		<p> 
+		We landed at about midnight and our next flight was scheduled for 6:50. Of course now we were in Spanish speaking country so things got a little more complicated.  We managed to figure out where to go and got through security into the domestic terminal,  went to the gate and camped out on the seats.  Within a couple of hours,  I noticed several other people also camping out.  Meanwhile,  the cleaning crew was busy mopping and buffing the floors.  
+		</p>
+
+		<p> 
+		At 6:30, we boarded our flight for the short hop to Cusco. I couldn't find my baggage claim ticket,  so we kind of slipped out the door when the guy want looking. Outside we saw Gary from SAS Travel with my name on a sign.  He took us to a van and took us to the hotel.  
+		</p>
+
+		<p> 
+		At this point,  we have been up for about 27 hours except for a little sleep in the airplane and Lima airport.
+		</p>
+
+		<!-- Page Content Ends -->
+
+		<!-- Clear floating photos so the gallery starts below them -->
+		<div style="clear: both;"></div>
+		
+		<!-- =====================================================
+		 PHOTO GALLERY — START
+		 Add, remove, or rearrange photographs here.
+		 Change object-position to adjust thumbnail cropping.
+		 ===================================================== -->
+
+		<h2>Photo Gallery</h2>
+
+		<div class="story-gallery" id="storyGallery">
+
+			<!-- PHOTO 1 -->
+			<button type="button">
+				<img src="/images/travels/peru/onourway/gary 2.JPG"
+					 alt="All in a day's work"
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+
+
+			<!-- ADD MORE PHOTOGRAPHS HERE -->
+
+		</div>
+
+		<!-- PHOTO GALLERY — END -->
+
+	</main>	
+	
+	<!-- =====================================================
+     SHARED LIGHTBOX — DO NOT MODIFY
+
+     This viewer works with:
+       lightbox.css
+       lightbox.js
+       story-gallery.js
+
+     All story pages use the same lightbox HTML.
+     The photo information comes from storyGallery above.
+     ===================================================== -->
+	
+	<div id="myLightbox" class="lightbox"
+		 role="dialog" aria-modal="true"
+		 aria-label="Photo viewer">
+
+		<span class="close-btn"
+			  onclick="closeLightbox()">&times;</span>
+
+		<span class="nav-btn prev-btn"
+			  onclick="changeImage(-1)">&#10094;</span>
+
+		<span class="nav-btn next-btn"
+			  onclick="changeImage(1)">&#10095;</span>
+
+		<img id="lightboxImg"
+			 class="lightbox-content"
+			 src="" alt="Active photo">
+
+		<div class="lightbox-caption">
+			<div id="captionTitle" class="caption-title"></div>
+			<div id="captionDesc" class="caption-desc"></div>
+		</div>
+	</div>
+</body>
+</html>
