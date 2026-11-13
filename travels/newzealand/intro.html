@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Tramping through New Zealand - Laura's Adventures</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="/navigation.css">
+	<link rel="stylesheet" href="/content-layouts.css">
+	<link rel="stylesheet" href="/lightbox.css">
+
+	<script src="/navigation.js" defer></script>
+	<script src="/lightbox.js" defer></script>
+	<script src="/story-gallery.js" defer></script>
+
+</head>
+
+
+<body class="story-page">
+	
+	<!-- ======================================================
+     STORY PAGE STARTER — EDITING CHECKLIST
+
+     1. Change the <title> in the HEAD section.
+     2. Change the <h1> page heading.
+     3. Replace the story paragraphs.
+     4. Add photographs in the PHOTO GALLERY section.
+     5. Change each photo's filename, title and caption.
+     6. Adjust object-position if thumbnail cropping
+        cuts off an important part of the photograph.
+
+     DO NOT CHANGE:
+     - storyGallery ID
+     - myLightbox ID
+     - Shared navigation and lightbox JavaScript
+     ====================================================== -->
+
+    <!-- Shared website navigation -->
+    <div id="global-navigation-hub"></div>
+
+	<main id="page-content">
+		<h1>Tramping through New Zealand</h1>
+
+		<!-- Page Content Starts -->
+		<p>
+		In New Zealand, people "tramp" instead of "hike". So, my friend and I will be tramping, and traveling through New Zealand for 3 weeks. Toward the end of the trip, we will backpack (tramp) for 4 days on what is supposed to be one of the "the finest walk in the world", the Milford Track. 
+		</p>
+
+		<p> 
+		I will try to add photos and comments to this site during my trip to share my travels. 
+		</p>
+
+		<p>
+		I am carrying a Delorme inReach personal tracking device on the trip and plan to have it on most of the time when I am out and about. With the inReach, I will be able to send and receive text messages from anywhere. In addition, the inReach will send my position to a map every 10 minutes. 
+		</p>
+
+
+		<!-- Page Content Ends -->
+
+		<!-- Clear floating photos so the gallery starts below them -->
+		<div style="clear: both;"></div>
+		
+		<!-- =====================================================
+		 PHOTO GALLERY — START
+		 Add, remove, or rearrange photographs here.
+		 Change object-position to adjust thumbnail cropping.
+		 ===================================================== -->
+
+		<h2>Photo Gallery</h2>
+
+		<div class="story-gallery" id="storyGallery">
+
+			<!-- PHOTO 1 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/intro-preview.jpg"
+					 alt=""
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+
+
+		  <!-- ADD MORE PHOTOGRAPHS HERE -->
+
+		</div>
+
+		<!-- PHOTO GALLERY — END -->
+
+	</main>	
+	
+	<!-- =====================================================
+     SHARED LIGHTBOX — DO NOT MODIFY
+
+     This viewer works with:
+       lightbox.css
+       lightbox.js
+       story-gallery.js
+
+     All story pages use the same lightbox HTML.
+     The photo information comes from storyGallery above.
+     ===================================================== -->
+	
+	<div id="myLightbox" class="lightbox"
+		 role="dialog" aria-modal="true"
+		 aria-label="Photo viewer">
+
+		<span class="close-btn"
+			  onclick="closeLightbox()">&times;</span>
+
+		<span class="nav-btn prev-btn"
+			  onclick="changeImage(-1)">&#10094;</span>
+
+		<span class="nav-btn next-btn"
+			  onclick="changeImage(1)">&#10095;</span>
+
+		<img id="lightboxImg"
+			 class="lightbox-content"
+			 src="" alt="Active photo">
+
+		<div class="lightbox-caption">
+			<div id="captionTitle" class="caption-title"></div>
+			<div id="captionDesc" class="caption-desc"></div>
+		</div>
+	</div>
+</body>
+</html>
