@@ -17,7 +17,7 @@
 <!-- ========================================================================
      TRAVEL LANDING PAGE — EDITING CHECKLIST
 
-     1. Save a copy as peru.html, germany.html, etc.
+     1. This is the New Zealand trip page; use travel-page-starter.html for other trips.
      2. Change the <title> above and the <h1> below.
      3. Change the BODY background image filename and its filter settings.
      4. Replace the trip dates and itinerary entries.
@@ -98,45 +98,95 @@
 
                 <div class="tl-stories-heading">
                     <h2 id="stories-title">Stories from the Trip</h2>
-                    <!-- CHANGE THE LINK to this trip's separate gallery page.
-                         If there is no gallery yet, remove this <a> temporarily. -->
-                    <a class="tl-gallery-link" href="/travels/TRIP-FOLDER/gallery.html">
+                    <!-- Photo gallery link: change the href if you move the gallery page. -->
+                    <a class="tl-gallery-link" href="/newzealand-gallery.html">
                         Photo Gallery &rarr;
                     </a>
                 </div>
 
                 <div class="tl-story-list">
-                    <a class="tl-story-card" href="/travels/newzealand/intro.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/intro-preview.jpg" alt="" loading="lazy">
-                        <div class="tl-story-details"><h3>Tramping Through New Zealand</h3><p>Getting ready for three weeks of exploring New Zealand, where hiking is called tramping.</p><span class="tl-read-link">Read story →</span></div>
-					</a>
-                    <a class="tl-story-card" href="/travels/newzealand/day-one.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/day1-preview.jpg" alt="" loading="lazy">
-                        <div class="tl-story-details"><h3>Day One, Auckland</h3><p>Arriving in Auckland after the long flight and beginning the journey through New Zealand.</p><span class="tl-read-link">Read story →</span></div>
+                    <!-- Each card needs BOTH the tl-story-media wrapper and
+                         the tl-story-details wrapper for the shared CSS layout.
+                         Copy a complete <a class="tl-story-card"> block to add stories. -->
+                    <a class="tl-story-card" href="/travels/newzealand/intro.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/intro-preview.jpg" alt="" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Tramping Through New Zealand</h3>
+                            <p>Getting ready for three weeks of exploring New Zealand, where hiking is called tramping.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
                     </a>
-                    <a class="tl-story-card" href="/travels/newzealand/driving.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/driving-preview.jpg" alt="" loading="lazy">
-                        <div class="tl-story-details"><h3>Driving on the Wrong Side of the Road</h3><p>Adjusting to a rental car and to driving on the opposite side of the road.</p><span class="tl-read-link">Read story →</span></div>
+                    <a class="tl-story-card" href="/travels/newzealand/day-one.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/day1-preview.jpg" alt="" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Day One, Auckland</h3>
+                            <p>Arriving in Auckland after the long flight and beginning the journey through New Zealand.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
                     </a>
-					<a class="tl-story-card" href="/travels/newzealand/tubing.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/tubing-preview.jpg" alt="Ready for tubing through a glowworm cave" loading="lazy">
-                        <div class="tl-story-details"><h3>Black Labyrinth Cave Tubing</h3><p>Our first underground adventure in Waitomo — tubing through dark caves, jumping over waterfalls, and floating beneath thousands of glowworms.</p><span class="tl-read-link">Read story →</span></div>
-                    </a>					
-                    <a class="tl-story-card" href="/travels/newzealand/caving.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/caving-preview.jpg" alt="Rock passage on a Waitomo caving adventure" loading="lazy">
-                        <div class="tl-story-details"><h3>Black Odyssey Caving</h3><p>Another underground adventure: the Black Odyssey, followed by a forest walk and dinner in Hell.</p><span class="tl-read-link">Read story →</span></div>
+                    <a class="tl-story-card" href="/travels/newzealand/driving.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/driving-preview.jpg" alt="" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Driving on the Wrong Side of the Road</h3>
+                            <p>Adjusting to a rental car and to driving on the opposite side of the road.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
                     </a>
-                    <a class="tl-story-card" href="/travels/newzealand/kayak-squeeze.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/kayak-preview.jpg" alt="Kayakers on a New Zealand river" loading="lazy">
-                        <div class="tl-story-details"><h3>Kayak Squeeze</h3><p>Kayaking the Waikato River, squeezing through rocks and climbing a warm waterfall to a hot pool.</p><span class="tl-read-link">Read story →</span></div>
+                    <a class="tl-story-card" href="/travels/newzealand/tubing.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/tubing-preview.jpg" alt="Ready for tubing through a glowworm cave" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Black Labyrinth Cave Tubing</h3>
+                            <p>Our first underground adventure in Waitomo — tubing through dark caves, jumping over waterfalls, and floating beneath thousands of glowworms.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
+                    </a>                    
+                    <a class="tl-story-card" href="/travels/newzealand/caving.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/caving-preview.jpg" alt="Rock passage on a Waitomo caving adventure" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Black Odyssey Caving</h3>
+                            <p>Another underground adventure: the Black Odyssey, followed by a forest walk and dinner in Hell.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
                     </a>
-                    <a class="tl-story-card" href="/travels/newzealand/hobbiton.html" >
-                        <img class="tl-story-image" src="/images/travels/newzealand/hobbiton-preview.jpg" alt="Pulling a cart at Hobbiton in New Zealand" loading="lazy">
-                        <div class="tl-story-details"><h3>Hobbiton</h3><p>Exploring the Hobbit village, with its tiny homes, smoky chimneys and a visit to the Green Dragon.</p><span class="tl-read-link">Read story →</span></div>
+                    <a class="tl-story-card" href="/travels/newzealand/kayak-squeeze.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/kayak-preview.jpg" alt="Kayakers on a New Zealand river" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Kayak Squeeze</h3>
+                            <p>Kayaking the Waikato River, squeezing through rocks and climbing a warm waterfall to a hot pool.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
+                    </a>
+                    <a class="tl-story-card" href="/travels/newzealand/hobbiton.html">
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/hobbiton-preview.jpg" alt="Pulling a cart at Hobbiton in New Zealand" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Hobbiton</h3>
+                            <p>Exploring the Hobbit village, with its tiny homes, smoky chimneys and a visit to the Green Dragon.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
                     </a>
                     <a class="tl-story-card" href="/travels/newzealand/making-knives.html">
-                        <img class="tl-story-image" src="/images/travels/newzealand/knives-preview.jpg" alt="A handmade knife and tools on an anvil" loading="lazy">
-                        <div class="tl-story-details"><h3>Making Knives</h3><p>A day at Barrytown Knifemaking, turning a piece of steel into a knife to take home.</p><span class="tl-read-link">Read story →</span></div>
+                        <div class="tl-story-media">
+                            <img class="tl-story-image" src="/images/travels/newzealand/knives-preview.jpg" alt="A handmade knife and tools on an anvil" style="object-position: center center;" loading="lazy">
+                        </div>
+                        <div class="tl-story-details">
+                            <h3>Making Knives</h3>
+                            <p>A day at Barrytown Knifemaking, turning a piece of steel into a knife to take home.</p>
+                            <span class="tl-read-link">Read story →</span>
+                        </div>
                     </a>
 
 
