@@ -117,7 +117,7 @@ body.travel-page.travel-landing *::after {
 .tl-itinerary {
     position: sticky;
     top: calc(var(--tl-menu-height) + 16px); /* Keep below fixed navigation */
-    max-height: calc(100dvh - var(--tl-menu-height) - 32px);
+    max-height: calc(150dvh - var(--tl-menu-height) - 32px);
     overflow-y: auto; /* Scroll INSIDE the itinerary, not over the story cards */
     overscroll-behavior: contain;
     background: rgba(251, 250, 245, 0.97);
