@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Story Name - Laura's Adventures</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="/navigation.css">
+	<link rel="stylesheet" href="/content-layouts.css">
+	<link rel="stylesheet" href="/lightbox.css">
+
+	<script src="/navigation.js" defer></script>
+	<script src="/lightbox.js" defer></script>
+	<script src="/story-gallery.js" defer></script>
+
+</head>
+
+
+<body class="story-page">
+	
+	<!-- ======================================================
+     STORY PAGE STARTER — EDITING CHECKLIST
+
+     1. Change the <title> in the HEAD section.
+     2. Change the <h1> page heading.
+     3. Replace the story paragraphs.
+     4. Add photographs in the PHOTO GALLERY section.
+     5. Change each photo's filename, title and caption.
+     6. Adjust object-position if thumbnail cropping
+        cuts off an important part of the photograph.
+
+     DO NOT CHANGE:
+     - storyGallery ID
+     - myLightbox ID
+     - Shared navigation and lightbox JavaScript
+     ====================================================== -->
+
+    <!-- Shared website navigation -->
+    <div id="global-navigation-hub"></div>
+
+	<main id="page-content">
+		<h1>Story Name</h1>
+
+		<!-- Page Content Starts -->
+		<img src="/images/travels/newzealand/day-one/day1.jpg" width="300" class="photo-left" alt=""/>
+		<p>
+		I arrived in Auckland at 5:50 am this morning, after a 13 hour flight. It was a long flight but I was able to sleep a little bit. See my seat? Well, not really, I just got the crew to take my picture in first class as I was exiting the plane. I wish I could have sat there! 
+		</p>
+
+		<p>
+		After going through customs, I found out that Cristina's flight was delayed and eventually found out that she wouldn't get in until 10 pm. She was originally scheduled to get in at about 1 o'clock in the afternoon. So, I spent the day taking a nap and driving around trying to get used to driving on the wrong side of the road. 
+		</p>
+
+		<p>
+		One of the places I went was a small park by the shoreline. I wandered around a little with my camera. The tide was out, so everything was mostly mud, but there were hundreds of little holes in the mud, so I sat very still and tried to see if something would come out of one. Eventually, I noticed this one little crab, so started taking pictures. The I saw some movement in my peripheral vision and realized there were little crabs all over the place. Then I moved and they all disappeared into the closest hole. Watch this little video I took to see what I mean. I actually enjoyed this little activity a lot. 
+		</p>
+
+		<!-- Page Content Ends -->
+
+		<!-- Clear floating photos so the gallery starts below them -->
+		<div style="clear: both;"></div>
+		
+		<!-- =====================================================
+		 PHOTO GALLERY — START
+		 Add, remove, or rearrange photographs here.
+		 Change object-position to adjust thumbnail cropping.
+		 ===================================================== -->
+
+		<h2>Photo Gallery</h2>
+
+		<div class="story-gallery" id="storyGallery">
+
+			<!-- PHOTO 1 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/day-one/day1.jpg"
+					 alt="I think this was business class. They let me take a picture on my way out of the plane."
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+			<!-- PHOTO 2 -->
+			<button type="button">
+				<img src="/images/travels/newzealand/day-one/20160106_082420.jpg"
+					 alt="This took 13 hours. Doesn't look that long here."
+					 data-caption=""
+					 style="object-position: center center;"
+					 loading="lazy">
+			</button>
+
+			<!-- ADD MORE PHOTOGRAPHS HERE -->
+
+		</div>
+
+		<!-- PHOTO GALLERY — END -->
+
+	</main>	
+	
+	<!-- =====================================================
+     SHARED LIGHTBOX — DO NOT MODIFY
+
+     This viewer works with:
+       lightbox.css
+       lightbox.js
+       story-gallery.js
+
+     All story pages use the same lightbox HTML.
+     The photo information comes from storyGallery above.
+     ===================================================== -->
+	
+	<div id="myLightbox" class="lightbox"
+		 role="dialog" aria-modal="true"
+		 aria-label="Photo viewer">
+
+		<span class="close-btn"
+			  onclick="closeLightbox()">&times;</span>
+
+		<span class="nav-btn prev-btn"
+			  onclick="changeImage(-1)">&#10094;</span>
+
+		<span class="nav-btn next-btn"
+			  onclick="changeImage(1)">&#10095;</span>
+
+		<img id="lightboxImg"
+			 class="lightbox-content"
+			 src="" alt="Active photo">
+
+		<div class="lightbox-caption">
+			<div id="captionTitle" class="caption-title"></div>
+			<div id="captionDesc" class="caption-desc"></div>
+		</div>
+	</div>
+</body>
+</html>
