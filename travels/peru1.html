@@ -12,6 +12,44 @@
     <script src="/navigation.js" defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+	
+	
+	<style>
+	/* =====================================================
+	   PERU — CUSTOM ACCENT COLORS
+
+	   These settings affect only this Peru page.
+	   The shared travel-landing.css remains unchanged.
+	   ===================================================== */
+
+	/* Photo Gallery button */
+	.peru-page .tl-gallery-link {
+		background: #f8eee5;    /* Warm cream */
+		color: #633444;         /* Burgundy text */
+	}
+
+	/* Photo Gallery button when hovered */
+	.peru-page .tl-gallery-link:hover {
+		background: #f0d9c7;
+	}
+
+	/* Read Story links */
+	.peru-page .tl-read-link {
+		color: #853f50;         /* Berry red */
+	}
+
+	/* Dates in itinerary */
+	.peru-page .tl-trip-date {
+		color: #853f50;
+	}
+
+	/* Outline around story cards when hovered */
+	.peru-page .tl-story-card:hover,
+	.peru-page .tl-story-card:focus-visible {
+		outline-color: #b78083;
+	}
+	</style>
+
 </head>
 
 <!-- ========================================================================
@@ -35,11 +73,12 @@
      The background is ONLY blurred, not the page text or story cards.
      ======================================================================== -->
 
-<body class="travel-page travel-landing"
+<body class="travel-page travel-landing peru-page"
       style="--travel-bg-image: url('/images/peru-bg.jpg');
              --travel-bg-blur: 6px;
              --travel-bg-brightness: .85;
-             --travel-bg-saturation: .85;">
+             --travel-bg-saturation: .85;
+			 --tl-stories-color: rgba(99, 52, 68, 0.90);">
 
     <!-- Shared top navigation, created automatically from menu.json. -->
     <div id="global-navigation-hub"></div>
