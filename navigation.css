@@ -175,3 +175,35 @@
         padding: 12px 20px;
     }
 }
+
+
+/* =====================================================
+   SHARED NAVIGATION — SAME FONTS ON EVERY PAGE
+
+   The travel pages set their own body fonts. These rules
+   keep the site header consistent regardless of the page.
+
+   Site title: Georgia (serif)
+   Menu links: Times New Roman (serif, with clear numerals
+               for the 44CCT link)
+
+   CHANGE HERE if you want to try another menu font.
+   ===================================================== */
+
+/* Establish a consistent font and line spacing in the navigation. */
+#global-navigation-hub {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+#global-navigation-hub .site-header {
+    line-height: 1.25; /* Prevent page-specific body spacing changing the header */
+}
+
+/* Menu links and dropdown links use the SAME readable serif font. */
+#global-navigation-hub .nav-link,
+#global-navigation-hub .dropdown-content a {
+    font-family: "Times New Roman", Georgia, serif;
+    font-variant-numeric: lining-nums; /* Keeps the 44CCT digits normal height */
+    letter-spacing: 0.25px;
+}
+
