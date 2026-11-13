@@ -229,6 +229,43 @@
             letter-spacing: .02em;
         }
 
+
+		/* =====================================================
+		   STORIES HEADER — TITLE AND PHOTO GALLERY LINK
+		   ===================================================== */
+
+		.nz-stories-heading {
+			display: flex;
+			justify-content: space-between; /* Title left, link right */
+			align-items: center;            /* Vertically center both */
+			gap: 15px;                      /* Space between title and link */
+		}
+
+		/* Gallery link inside green header */
+		.nz-stories-heading .nz-gallery-link {
+			margin: 0;                      /* Remove previous top spacing */
+			padding: 8px 14px;              /* Button size */
+			background: #ffffff;            /* White button */
+			color: #335947;                 /* Dark green text */
+			border-radius: 4px;
+			text-decoration: none;
+			font-size: 13px;
+			font-weight: 600;
+			white-space: nowrap;            /* Keep label on one line */
+		}
+
+		.nz-stories-heading .nz-gallery-link:hover {
+			background: #e9eee8;
+		}
+
+		/* Phones — allow title and link to wrap */
+		@media (max-width: 600px) {
+			.nz-stories-heading {
+				flex-wrap: wrap;
+			}
+		}
+
+		
         /* --- SECTION 6: TABLET AND PHONE ADJUSTMENTS --- */
         @media (max-width: 900px) {
             .nz-main-grid {
@@ -324,7 +361,6 @@
             <h1>Tramping New Zealand</h1>
             <p class="trip-subtitle">January 5–27, 2016 · North &amp; South Islands</p>
             <a class="jump-to-stories" href="#stories-title">Jump to the stories ↓</a>
-			<a class="nz-gallery-link" href="/newzealand-gallery.html"> View the Photo Gallery</a>
         </header>
 
         <div class="nz-main-grid">
@@ -364,7 +400,13 @@
                  Replace low-resolution preview images with your originals.
                  ========================================================== -->
             <section class="stories-panel" aria-labelledby="stories-title">
-                <h2 id="stories-title" class="stories-heading">Stories from the Trip</h2>
+                <div class="nz-stories-heading">
+					<h2>Stories from the Trip</h2>
+
+					<a class="nz-gallery-link" href="/newzealand-gallery.html">
+						Photo Gallery &rarr;
+					</a>
+				</div>
                 <div class="story-list">
                     <a class="story-card" href="intro.html" >
                         <img class="story-image" src="/images/travels/newzealand/waitomo-day2-preview.jpg" alt="Person suspended above a cave floor during a Waitomo adventure" loading="lazy">
