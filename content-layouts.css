@@ -278,3 +278,55 @@ body.story-page .lightbox-content {
         grid-template-columns: repeat(2, minmax(0, 1fr)); /* Clickable gallery becomes TWO columns. */
     }
 }
+
+
+/* =====================================================
+   STORY PAGE VIDEOS
+   Click button to reveal a video player.
+   Works with locally hosted MP4 videos.
+   ===================================================== */
+
+/* Space above and below the video button */
+.story-video {
+    margin: 20px 0 30px;
+}
+
+/* Video button appearance */
+.story-video summary {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #335947;    /* Dark green */
+    color: #ffffff;         /* White text */
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+/* Hide the default disclosure triangle */
+.story-video summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Button hover and keyboard focus */
+.story-video summary:hover,
+.story-video summary:focus-visible {
+    background: #244234;
+}
+
+/* Video container */
+.story-video-player {
+    width: 100%;
+    max-width: 760px;     /* Maximum width of the video */
+    margin-top: 18px;     /* Space below button */
+}
+
+/* Actual video */
+.story-video-player video {
+    display: block;
+    width: 100%;          /* Fill available container width */
+    height: auto;         /* Preserve original proportions */
+    max-height: 75vh;     /* Limit height to 75% of screen */
+    object-fit: contain;  /* Never crop the video */
+}
