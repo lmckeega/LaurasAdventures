@@ -1,37 +1,42 @@
 /* ===========================================================
    SHARED PHOTO LIGHTBOX — ALL WEBSITE GALLERIES
 
-   Used by story pages, Bugs, Cakes, and other galleries that
-   include lightbox.css and lightbox.js.
+   Used by all story and JSON-based galleries.
+   The lightbox.js file automatically adds zoom controls.
 
-   HOW PHOTO SIZING WORKS:
-   lightbox.js reads each photo's actual proportions and makes
-   it as large as the screen allows WITHOUT cropping it.
-   Keep the image's width and height set by JavaScript.
+   QUICK FIND — SETTINGS YOU MIGHT CHANGE:
+     --lightbox-side-space      Room beside photo for arrows
+     --lightbox-vertical-space  Top/bottom breathing room
+     --lightbox-caption-gap     Space between controls and caption
 
-   MOST LIKELY SETTINGS TO CHANGE:
-   --lightbox-side-space       Room for left/right arrows
-   --lightbox-vertical-space   Room above/below photo + caption
-   --lightbox-caption-gap      Distance between photo and caption
+   ZOOM:
+   +, -, Reset buttons; mouse wheel; drag; two-finger pinch.
+   Normal photos are fitted without cropping or stretching.
+   Zoomed photos are clipped inside the photo viewing area,
+   keeping the navigation buttons and captions visible.
    =========================================================== */
 
 /* -----------------------------------------------------------
-   1. FULL-SCREEN DARK BACKGROUND AND PHOTO SPACE
+   1. FULL-SCREEN DARK BACKGROUND AND CONTENT SPACING
    ----------------------------------------------------------- */
 .lightbox {
-    --lightbox-side-space: 160px;      /* Desktop: 80px on each side for arrows */
-    --lightbox-vertical-space: 100px;  /* Desktop: breathing room at top/bottom */
-    --lightbox-caption-gap: 16px;      /* Space between image and caption */
+    --lightbox-side-space: 160px;      /* DESKTOP: about 80px each side for arrows */
+    --lightbox-vertical-space: 100px;  /* DESKTOP: total top + bottom padding */
+    --lightbox-caption-gap: 16px;      /* Gap between zoom controls and caption */
 
-    display: none;                    /* JavaScript changes this to flex when opened */
+    display: none;                    /* JavaScript changes to flex when opened */
     position: fixed;
-    z-index: 3000;                    /* Above the shared navigation header */
-    inset: 0;                         /* Fill the browser window */
+    z-index: 3000;                    /* Over the fixed navigation menu */
+    inset: 0;
     width: 100%;
-    height: 100%;                     /* Fallback for older browsers */
-    height: 100dvh;                   /* Use visible screen height on mobile */
+    height: 100%;
+    height: 100dvh;                   /* Adapts to mobile browser address bars */
+    box-sizing: border-box;
+    padding: calc(var(--lightbox-vertical-space) / 2)
+             calc(var(--lightbox-side-space) / 2);
+    overflow: hidden;
     background-color: rgba(10, 11, 14, 0.95);
-    color: #ffffff;                   /* Lightbox titles readable over dark background */
+    color: #ffffff;
 
     justify-content: center;
     align-items: center;
@@ -39,57 +44,123 @@
 }
 
 /* -----------------------------------------------------------
-   2. ENLARGED PHOTO
+   2. PHOTO VIEWING AREA — FILLS THE SPACE ABOVE CONTROLS
 
-   JavaScript sets an individual width and height to fit each
-   photo inside the available space at its original proportions.
-   The max values below are an additional safety limit.
+   JavaScript creates this wrapper around #lightboxImg.
+   It limits dragging and clips the zoomed image WITHOUT
+   clipping the captions or previous/next arrows.
    ----------------------------------------------------------- */
+.lightbox-photo-area {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;          /* Size to the photo, not the whole empty screen */
+    min-width: 0;
+    height: 0;              /* JavaScript sets the fitted photo height */
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;           /* Enables custom pinch/drag on phones */
+    user-select: none;
+}
+
+.lightbox-photo-area.is-zoomed { cursor: grab; }
+.lightbox-photo-area.is-dragging { cursor: grabbing; }
+
+/* JavaScript sets the fitted width/height of each photo. */
 .lightbox-content {
     display: block;
     width: auto;
     height: auto;
-    max-width: calc(100vw - var(--lightbox-side-space) - 8px);
-    max-height: calc(100dvh - var(--lightbox-vertical-space) - 8px);
-    object-fit: contain;             /* Never crop the enlarged photo */
-    box-sizing: content-box;         /* Border goes outside the measured photo size */
+    max-width: none;             /* Size is calculated to fit above */
+    max-height: none;
+    object-fit: contain;         /* Never crop photograph at normal size */
+    box-sizing: content-box;     /* Border is outside calculated photo size */
     flex-shrink: 0;
+    transform-origin: center center;
+    pointer-events: none;       /* Dragging handled by viewing area instead */
+    user-select: none;
 
-    border: 4px solid #1f2833;       /* Keep your original border */
+    border: 4px solid #1f2833;   /* Original border and shadow retained */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     border-radius: 2px;
 }
 
 /* -----------------------------------------------------------
-   3. PHOTO TITLES AND DESCRIPTIONS
+   3. ZOOM CONTROLS — CREATED AUTOMATICALLY BY lightbox.js
+   ----------------------------------------------------------- */
+.lightbox-zoom-controls {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    font: 600 14px 'Segoe UI', Tahoma, sans-serif;
+}
+
+.lightbox-zoom-controls button {
+    min-width: 40px;              /* Large enough to tap on a phone */
+    min-height: 36px;
+    padding: 5px 11px;
+    border: 1px solid #68747b;
+    border-radius: 5px;
+    color: #ffffff;
+    background: #283a43;
+    font: inherit;
+    cursor: pointer;
+}
+
+.lightbox-zoom-controls button:hover:not(:disabled),
+.lightbox-zoom-controls button:focus-visible {
+    background: #466371;
+    outline: 2px solid #c5d5de;
+    outline-offset: 1px;
+}
+
+.lightbox-zoom-controls button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.lightbox-zoom-level {
+    display: inline-block;
+    min-width: 52px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+}
+
+/* -----------------------------------------------------------
+   4. PHOTO TITLE AND OPTIONAL DESCRIPTION
    ----------------------------------------------------------- */
 .lightbox-caption {
     margin-top: var(--lightbox-caption-gap);
     text-align: center;
-    max-width: 80%;                   /* Prevent long captions from spanning the screen */
-    max-height: 25dvh;               /* Very long captions can scroll */
+    max-width: 80%;              /* Keep long captions from spanning the window */
+    max-height: 25dvh;          /* Long captions scroll instead of hiding photo */
     overflow-y: auto;
     flex-shrink: 0;
 }
 
 .caption-title {
-    font-size: 1.6rem;               /* Photograph title size */
+    font-size: 1.6rem;
     font-weight: 500;
     margin-bottom: 6px;
     letter-spacing: 1px;
 }
 
 .caption-desc {
-    font-size: 1.1rem;               /* Optional description size */
+    font-size: 1.1rem;
     color: #9c9c9c;
     font-weight: 300;
 }
 
 /* -----------------------------------------------------------
-   4. CLOSE BUTTON (X) AND PREVIOUS / NEXT ARROWS
+   5. CLOSE (X) AND PREVIOUS / NEXT ARROWS
    ----------------------------------------------------------- */
 .close-btn {
     position: absolute;
+    z-index: 2;
     top: 25px;
     right: 35px;
     font-size: 45px;
@@ -97,11 +168,11 @@
     cursor: pointer;
     transition: color 0.2s;
 }
-
 .close-btn:hover { color: #fff; }
 
 .nav-btn {
     position: absolute;
+    z-index: 2;
     top: 50%;
     transform: translateY(-50%);
     font-size: 55px;
@@ -111,30 +182,25 @@
     padding: 20px;
     transition: color 0.2s;
 }
-
 .nav-btn:hover { color: #fff; }
 .prev-btn { left: 20px; }
 .next-btn { right: 20px; }
 
 /* -----------------------------------------------------------
-   5. PHONES / SMALL SCREENS
+   6. PHONES / NARROW SCREENS
    ----------------------------------------------------------- */
 @media (max-width: 768px) {
     .lightbox {
-        --lightbox-side-space: 96px;      /* Allow 48px per side for arrows */
-        --lightbox-vertical-space: 85px;  /* More compact on a phone */
+        --lightbox-side-space: 96px;      /* About 48px per side for arrows */
+        --lightbox-vertical-space: 85px;  /* More compact top/bottom padding */
         --lightbox-caption-gap: 12px;
     }
-
-    .lightbox-caption {
-        max-width: 90%;
-    }
-
+    .lightbox-caption { max-width: 90%; }
     .caption-title { font-size: 1.25rem; }
-    .caption-desc  { font-size: 0.95rem; }
-
+    .caption-desc { font-size: 0.95rem; }
     .close-btn { top: 10px; right: 15px; font-size: 36px; }
     .nav-btn { font-size: 40px; padding: 10px; }
     .prev-btn { left: 5px; }
     .next-btn { right: 5px; }
+    .lightbox-zoom-controls { gap: 6px; }
 }
