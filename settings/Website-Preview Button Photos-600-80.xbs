@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><XnView_script version="1.0" name="Website-Preview Button Photos-600-80">
+    <Resize mode="1" width="600" height="0" unit="0" ratio="true" orientation="false" enlarge="1" resample="7" gamma_correct="false"/>
+    <Clean_metadata flags="30"/>
+    <Output folder="C:/website/Modified Images" filename="{Filename}" case="0" startIndex="1" format="JPEG">
+        <Options overwrite="1" orgDate="true" keepMeta="false" keepICC="false" keepFolder="true" checkFilesize="false" keepParentFolder="false" keepExtension="true" delOrg="false" multipage="false" allPages="false" openExplorer="false" beep="true" openBrowser="false" clearItems="false"/>
+        <JPEG useJPEGli="true" quality="80" progressive="true" optimizeHuffman="true" rebuildThumb="false" orgQuality="false" DCTMethod="2" subSampling="0" smoothFactor="0"/>
+    </Output>
+</XnView_script>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><XnView_script version="1.0" name="Website-Video-Thumbnails-400x300">
+    <Resize mode="4" width="400" height="300" unit="0" ratio="true" orientation="false" enlarge="0" resample="7" gamma_correct="false"/>
+    <Output folder="C:/website/Modified Images" filename="{Filename}" case="0" startIndex="1" format="JPEG">
+        <Options overwrite="1" orgDate="true" keepMeta="false" keepICC="false" keepFolder="true" checkFilesize="false" keepParentFolder="false" keepExtension="true" delOrg="false" multipage="false" allPages="false" openExplorer="false" beep="true" openBrowser="false" clearItems="false"/>
+        <JPEG useJPEGli="true" quality="85" progressive="true" optimizeHuffman="true" rebuildThumb="false" orgQuality="false" DCTMethod="2" subSampling="0" smoothFactor="0"/>
+    </Output>
+</XnView_script>
