@@ -204,3 +204,16 @@
     .next-btn { right: 5px; }
     .lightbox-zoom-controls { gap: 6px; }
 }
+
+
+/* =====================================================
+   ZOOM CONTROLS — HIDE BUTTONS
+
+   Zoom still works using the mouse wheel or
+   pinch gestures on phones and tablets.
+   ===================================================== */
+
+.lightbox-zoom-controls {
+    display: none;
+}
+
